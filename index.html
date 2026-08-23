@@ -241,6 +241,14 @@
   .tree-result .refs { margin-top: 1rem; }
   .tree-result .refs a { display: inline-block; margin-inline-end: 1.6rem; font-size: .8rem; }
 
+  /* login + admin */
+  .linput { display: block; width: 100%; background: none; border: none; border-bottom: 1px solid var(--forest-12); padding: .7rem 0; font-family: var(--sans); font-size: .95rem; color: var(--ink); outline: none; }
+  .linput:focus { border-bottom-color: var(--forest-40); }
+  .linput::placeholder { color: var(--forest-40); }
+  html.gated .hdr-search, html.gated #clinicLink, html.gated #adminLink { display: none; }
+  html.gated footer { display: none; }
+  .catdot { display: inline-block; width: .5em; height: .5em; border-radius: 50%; margin-inline-end: .6em; }
+
   /* footer */
   footer { margin-top: 4rem; border-top: 1px solid var(--forest-40); padding: 2.4rem 0 4rem; position: relative; z-index: 1; }
   footer .wrap { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 1rem; }
@@ -279,12 +287,29 @@
   <div class="header-inner container">
     <a class="brand" href="#/" title="home"><img src="crest.png" alt="Sahl family crest" width="27" height="32"><span><span class="brand-name">the trainee</span><span class="brand-domain"><span id="gpSpin">gp</span>.sahl.ie</span></span></a>
     <input class="hdr-search" id="searchBox" type="search" placeholder="search · try “derm red flags”" aria-label="Search">
-    <a class="hdr-link" href="#/clinic">clinic</a>
+    <a class="hdr-link" href="#/clinic" id="clinicLink">clinic</a>
+    <a class="hdr-link" href="#/admin" id="adminLink">admin</a>
     <button class="hdr-link" id="lampBtn" aria-label="Toggle lamp mode">lamp</button>
   </div>
 </header>
 
 <main>
+  <!-- ==================== LOGIN ==================== -->
+  <div class="view" id="view-login" hidden>
+    <section class="next" style="min-height:82vh; display:flex; flex-direction:column; justify-content:center">
+      <div class="reading">
+        <img src="crest.png" width="54" height="64" alt="Sahl family crest" style="display:block; margin-bottom:1.8rem">
+        <h1 style="font-family:var(--serif);font-weight:400;font-size:clamp(2.2rem,5vw,3.4rem);letter-spacing:-.01em;line-height:1.1;color:var(--forest-90)">the trainee signs in.</h1>
+        <form id="loginForm" style="margin-top:2.4rem;max-width:22rem">
+          <input class="linput" id="lu" placeholder="username" autocomplete="username">
+          <input class="linput" id="lp" type="password" placeholder="password" autocomplete="current-password" style="margin-top:.4rem">
+          <div class="tm-actions"><button class="tbtn primary" type="submit">enter →</button></div>
+          <p id="loginErr" hidden style="margin-top:1.1rem;font-family:var(--serif);font-style:italic;font-size:1.05rem;color:var(--accent)">not the door. try again.</p>
+        </form>
+      </div>
+    </section>
+  </div>
+
   <!-- ==================== HOME ==================== -->
   <div class="view" id="view-home">
 
@@ -470,6 +495,46 @@
     </section>
   </div>
 
+  <!-- ==================== ADMIN ==================== -->
+  <div class="view" id="view-admin" hidden>
+    <section class="clinic-head">
+      <div class="reading">
+        <p class="kicker"><em>⌘</em><span>admin</span></p>
+        <h1 class="tm-big">the study.</h1>
+        <p class="tm-sub">the profile, the people, the record</p>
+
+        <div class="d-row" style="grid-template-columns:auto 1fr auto; text-decoration:none; border-top:1px solid var(--forest-12); margin-top:2rem; padding-top:1.5rem">
+          <img src="crest.png" width="54" height="64" alt="" style="display:block">
+          <span class="dd"><b style="font-family:var(--serif);font-size:1.45rem;font-weight:500;color:var(--forest-90)">Dr Sahl Musa</b><br>gp trainee · year 3 · mid-west<br><span style="color:var(--forest-40)">IMC 432647</span></span>
+          <span></span>
+        </div>
+        <a class="d-row" href="https://www.icgp.ie" target="_blank" rel="noopener">
+          <span class="mono">GPEP</span>
+          <span class="dd">the ePortfolio, on the Kaizen platform. sign in via icgp.ie.</span>
+          <span class="arr">→</span>
+        </a>
+
+        <h2 class="blk-title" style="margin-top:2.6rem">the people</h2>
+        <div class="rows" id="userRows"></div>
+
+        <h2 class="blk-title" style="margin-top:2.6rem">the log</h2>
+        <div class="rows" id="logRows"></div>
+
+        <h2 class="blk-title" style="margin-top:2.6rem">post to the stream</h2>
+        <div class="slot" style="grid-template-columns:1fr 1fr auto; border-top:1px solid var(--forest-12); padding-top:1rem">
+          <input id="stTitle" placeholder="the line (one sentence)" aria-label="stream line">
+          <input id="stLink" placeholder="link (optional)" aria-label="stream link">
+          <span class="tools"><button class="tbtn" id="stSave">post</button></span>
+        </div>
+
+        <div class="tm-actions" style="margin-top:3rem">
+          <button class="tbtn" id="signOut">sign out</button>
+          <button class="tbtn" id="clearDemo">clear demo data</button>
+        </div>
+      </div>
+    </section>
+  </div>
+
   <!-- ==================== TREE ==================== -->
   <div class="view" id="view-tree" hidden>
     <section class="clinic-head">
@@ -592,8 +657,16 @@ const store = {
 };
 
 /* ================= router ================= */
-const VIEWS = { "": "view-home", "#/": "view-home", "#/clinic": "view-clinic" };
+const VIEWS = { "": "view-home", "#/": "view-home", "#/clinic": "view-clinic", "#/admin": "view-admin" };
+const isAuthed = () => sessionStorage.getItem("gp-auth") === "1";
 function route() {
+  if (!isAuthed()) {
+    document.documentElement.classList.add("gated");
+    document.querySelectorAll(".view").forEach(v => { v.hidden = v.id !== "view-login"; });
+    window.scrollTo(0, 0);
+    return;
+  }
+  document.documentElement.classList.remove("gated");
   const h = location.hash;
   let target = VIEWS[h];
   if (h.startsWith("#/tree/")) target = "view-tree";
@@ -635,6 +708,64 @@ $("lampBtn").addEventListener("click", () => {
   store.set("gp-lamp", on);
   document.querySelector('meta[name="theme-color"]').setAttribute("content", on ? "#24221A" : "#EFEBCE");
 });
+
+/* ================= auth (demo gate: admin / admin) ================= */
+$("loginForm").addEventListener("submit", e => {
+  e.preventDefault();
+  if ($("lu").value.trim() === "admin" && $("lp").value === "admin") {
+    sessionStorage.setItem("gp-auth", "1");
+    location.hash = "#/";
+    route();
+  } else {
+    $("loginErr").hidden = false;
+  }
+});
+
+/* ================= demo data (defaults until the owner edits) ================= */
+const DEFAULT_RENEWALS = [
+  { name: "BLS renewal", date: "2026-09-28" },
+  { name: "Garda vetting", date: "2026-10-12" },
+  { name: "IMC registration", date: "2026-11-30" },
+  { name: "ACLS", date: "2026-12-01" },
+  { name: "indemnity", date: "2027-01-31" },
+  { name: "ATLS", date: "2027-03-20" }
+];
+const getRenewals = () => [].concat(store.get("gp-renewals", null) ?? DEFAULT_RENEWALS);
+
+const DEFAULT_CONTACTS = [
+  { name: "scheme office", detail: "scheme.office@example.ie · 061 000 000" },
+  { name: "programme director", detail: "director@example.ie" },
+  { name: "UL postgrad centre", detail: "061 000 001" },
+  { name: "PCRO", detail: "pcro@example.ie" }
+];
+const getContacts = () => [].concat(store.get("gp-contacts", null) ?? DEFAULT_CONTACTS);
+
+const LOG_CATS = { teaching: "var(--forest)", clinic: "var(--accent)", assessment: "#7A6A2F", admin: "var(--forest-40)" };
+const DEFAULT_LOG = [
+  { d: "2026-07-15", t: "day release · curriculum planning", c: "teaching" },
+  { d: "2026-07-16", t: "clinic · 11 patients · on time", c: "clinic" },
+  { d: "2026-07-22", t: "day release · uncertainty of cases", c: "teaching" },
+  { d: "2026-07-23", t: "cbd · chronic disease review", c: "assessment" },
+  { d: "2026-07-29", t: "day release · audit and research", c: "teaching" },
+  { d: "2026-07-30", t: "clinic · 13 patients · 6 min over", c: "clinic" },
+  { d: "2026-08-05", t: "audit · data collection finished", c: "admin" },
+  { d: "2026-08-06", t: "clinic · 12 patients · on time", c: "clinic" },
+  { d: "2026-08-12", t: "mini-cex · paediatric fever", c: "assessment" },
+  { d: "2026-08-13", t: "study leave form sent", c: "admin" },
+  { d: "2026-08-19", t: "reading · deprescribing", c: "teaching" },
+  { d: "2026-08-20", t: "clinic · 10 patients · 2 min ahead", c: "clinic" },
+  { d: "2026-08-21", t: "cbd · diabetes annual review", c: "assessment" }
+];
+const getLog = () => [].concat(store.get("gp-log", null) ?? DEFAULT_LOG);
+
+const DEMO_USERS = [
+  { name: "Dr Sahl Musa", meta: "year 3 · mid-west", role: "owner" },
+  { name: "Dr Aisha Rahman", meta: "year 3 · mid-west", role: "trainee" },
+  { name: "Dr Priya Nair", meta: "year 4 · mid-west", role: "trainee" },
+  { name: "Dr Conor Lynch", meta: "year 2 · mid-west", role: "trainee" },
+  { name: "Dr Elena Petrova", meta: "year 3 · mid-west", role: "trainee" },
+  { name: "Dr Tomás Ó Briain", meta: "year 1 · mid-west", role: "trainee" }
+];
 
 /* ================= calendar: next up / radar / year ================= */
 const futureWeeks = CAL.weeks.filter(w => parse(w.date) >= today);
@@ -699,16 +830,20 @@ $("year").addEventListener("click", e => {
 });
 
 /* ================= the stream ================= */
-const STREAM = [
+const STREAM_SEED = [
   { d: "2026-08-23", t: "gp.sahl.ie opens: the calendar, the timer, the atlas", u: "#/" },
   { d: "2026-08-23", t: "the derm red-flag walk-through added to the atlas", u: "#/tree/derm" },
   { d: "2026-08-23", t: "the year register: 55 Wednesdays, parsed from the scheme PDF", u: "#year" }
 ];
-const lastSeen = store.get("gp-seen", null);
-$("streamRows").innerHTML = STREAM.map(s => {
-  const isNew = lastSeen && s.d > lastSeen;
-  return `<div class="r-row"><span class="d">${s.d.slice(8)}/${s.d.slice(5, 7)}</span><span class="w">${isNew ? '<span class="new-dot"></span>' : ""}<a href="${s.u}">${s.t}</a></span><span class="x">${s.d.slice(0, 4)}</span></div>`;
-}).join("");
+function renderStream() {
+  const items = STREAM_SEED.concat([].concat(store.get("gp-stream-extra", []))).sort((a, b) => b.d.localeCompare(a.d));
+  const lastSeen = store.get("gp-seen", null);
+  $("streamRows").innerHTML = items.map(s => {
+    const isNew = lastSeen && s.d > lastSeen;
+    return `<div class="r-row"><span class="d">${s.d.slice(8)}/${s.d.slice(5, 7)}</span><span class="w">${isNew ? '<span class="new-dot"></span>' : ""}<a href="${esc(s.u)}">${esc(s.t)}</a></span><span class="x">${s.d.slice(0, 4)}</span></div>`;
+  }).join("");
+}
+renderStream();
 store.set("gp-seen", new Date().toISOString().slice(0, 10));
 
 /* ================= the atlas shelves ================= */
@@ -772,8 +907,10 @@ $("searchBox").addEventListener("keydown", e => { if (e.key === "Enter") runSear
 
 /* ================= renewals + contacts (local, editable) ================= */
 function daysUntil(iso) { const d = parse(iso); return Math.round((d - today) / DAY); }
+let renewalsView = [];
 function renderRenewals() {
-  const list = [].concat(store.get("gp-renewals", []));
+  renewalsView = getRenewals().slice().sort((a, b) => (a.date || "9999").localeCompare(b.date || "9999"));
+  const list = renewalsView;
   $("renewals").innerHTML = list.length ? list.map((r, i) => {
     const n = daysUntil(r.date);
     const label = isNaN(n) ? "no date" : n < 0 ? "expired" : n === 0 ? "today" : "in " + n + " days";
@@ -785,7 +922,7 @@ $("rnCancel").addEventListener("click", () => { $("renewalForm").hidden = true; 
 $("rnSave").addEventListener("click", () => {
   const name = $("rnName").value.trim();
   if (!name) return;
-  const list = [].concat(store.get("gp-renewals", []));
+  const list = getRenewals();
   list.push({ name, date: $("rnDate").value || "" });
   store.set("gp-renewals", list);
   $("rnName").value = ""; $("rnDate").value = ""; $("renewalForm").hidden = true;
@@ -794,15 +931,16 @@ $("rnSave").addEventListener("click", () => {
 $("renewals").addEventListener("click", e => {
   const a = e.target.closest(".del-renewal"); if (!a) return;
   e.preventDefault();
-  const list = [].concat(store.get("gp-renewals", []));
-  list.splice(+a.dataset.i, 1);
-  store.set("gp-renewals", list);
+  renewalsView.splice(+a.dataset.i, 1);
+  store.set("gp-renewals", renewalsView);
   renderRenewals();
 });
 renderRenewals();
 
+let contactsView = [];
 function renderContacts() {
-  const list = [].concat(store.get("gp-contacts", []));
+  contactsView = getContacts().slice();
+  const list = contactsView;
   $("contacts").innerHTML = list.length ? list.map((c, i) =>
     `<div class="r-row"><span class="d" style="white-space:normal">${esc(c.name)}</span><span class="w">${esc(c.detail)}</span><span class="x"><a href="#" data-i="${i}" class="del-contact" style="color:inherit">remove</a></span></div>`
   ).join("") : `<div class="r-row"><span class="w">scheme office, UL, PCRO. add once; they stay in this browser.</span></div>`;
@@ -812,7 +950,7 @@ $("ctCancel").addEventListener("click", () => { $("contactForm").hidden = true; 
 $("ctSave").addEventListener("click", () => {
   const name = $("ctName").value.trim();
   if (!name) return;
-  const list = [].concat(store.get("gp-contacts", []));
+  const list = getContacts();
   list.push({ name, detail: $("ctDetail").value.trim() });
   store.set("gp-contacts", list);
   $("ctName").value = ""; $("ctDetail").value = ""; $("contactForm").hidden = true;
@@ -821,9 +959,8 @@ $("ctSave").addEventListener("click", () => {
 $("contacts").addEventListener("click", e => {
   const a = e.target.closest(".del-contact"); if (!a) return;
   e.preventDefault();
-  const list = [].concat(store.get("gp-contacts", []));
-  list.splice(+a.dataset.i, 1);
-  store.set("gp-contacts", list);
+  contactsView.splice(+a.dataset.i, 1);
+  store.set("gp-contacts", contactsView);
   renderContacts();
 });
 renderContacts();
@@ -980,6 +1117,10 @@ function endDay() {
     ["history / exam / plan", phaseTotals.some(t => t > 0) ? phaseTotals.slice(0, 3).map(t => Math.round(t / 60) + "m").join(" · ") : "not tracked"]
   ];
   $("tmSumRows").innerHTML = rows.map(r => `<div class="lv-row"><span class="t">${r[0]}</span><span class="v">${r[1]}</span></div>`).join("");
+  const log = getLog();
+  log.push({ d: new Date().toISOString().slice(0, 10), t: `clinic · ${done.length} patients · ${actual <= planned ? "on time" : "+" + Math.round((actual - planned) / 60) + " min"}`, c: "clinic" });
+  store.set("gp-log", log);
+  renderLog();
   showTmPane("summary");
 }
 
@@ -1046,6 +1187,38 @@ document.addEventListener("keydown", e => {
 
 /* resume hint */
 if (day && !day.ended) $("tmRestore").hidden = false;
+
+/* ================= admin ================= */
+function renderUsers() {
+  $("userRows").innerHTML = DEMO_USERS.map(u =>
+    `<div class="r-row" style="grid-template-columns:minmax(11rem,15rem) 1fr auto"><span class="d" style="white-space:normal">${u.name}</span><span class="w">${u.meta}</span><span class="x">${u.role}</span></div>`
+  ).join("");
+}
+let logView = [];
+function renderLog() {
+  logView = getLog().slice().sort((a, b) => b.d.localeCompare(a.d));
+  $("logRows").innerHTML = logView.map(l =>
+    `<div class="r-row"><span class="d">${l.d.slice(8)}/${l.d.slice(5, 7)}</span><span class="w">${esc(l.t)}</span><span class="x"><span class="catdot" style="background:${LOG_CATS[l.c] || "var(--forest-40)"}"></span>${l.c}</span></div>`
+  ).join("");
+}
+$("stSave").addEventListener("click", () => {
+  const t = $("stTitle").value.trim();
+  if (!t) return;
+  const list = [].concat(store.get("gp-stream-extra", []));
+  list.push({ d: new Date().toISOString().slice(0, 10), t, u: $("stLink").value.trim() || "#/" });
+  store.set("gp-stream-extra", list);
+  $("stTitle").value = ""; $("stLink").value = "";
+  renderStream();
+  $("stSave").textContent = "posted";
+  setTimeout(() => $("stSave").textContent = "post", 1400);
+});
+$("signOut").addEventListener("click", () => { sessionStorage.removeItem("gp-auth"); location.hash = "#/"; route(); });
+$("clearDemo").addEventListener("click", () => {
+  ["gp-renewals", "gp-contacts", "gp-log", "gp-day", "gp-stream-extra"].forEach(k => localStorage.removeItem(k));
+  location.reload();
+});
+renderUsers();
+renderLog();
 
 /* ================= decision trees ================= */
 const TREES = {
