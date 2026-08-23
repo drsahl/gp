@@ -20,7 +20,7 @@
 <link rel="apple-touch-icon" href="crest-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
     --paper:      #EFEBCE;
@@ -60,17 +60,6 @@
       radial-gradient(ellipse 80% 60% at 20% 8%, rgba(255,255,255,.35), transparent 60%),
       radial-gradient(ellipse 70% 50% at 85% 92%, rgba(6,64,19,.05), transparent 60%);
   }
-
-  .ghost {
-    position: fixed; right: -5vw; top: 50%;
-    font-family: 'Amiri', serif; font-weight: 700;
-    font-size: 44vw; line-height: 1;
-    color: var(--forest); opacity: .025;
-    pointer-events: none; user-select: none; z-index: 0;
-    animation: breathe 9s ease-in-out infinite;
-    will-change: transform;
-  }
-  @keyframes breathe { 0%,100% { opacity: .02; } 50% { opacity: .034; } }
 
   /* masthead */
   .site-header {
@@ -194,7 +183,6 @@
   .r.on { opacity: 1; transform: none; }
 
   @media (max-width: 700px) {
-    .ghost { font-size: 84vw; right: -24vw; }
     .r-row { grid-template-columns: 4.6rem 1fr; }
     .r-row .x { grid-column: 2; }
     .d-row { grid-template-columns: 1fr; gap: .3rem; }
@@ -209,8 +197,6 @@
 </style>
 </head>
 <body>
-
-<div class="ghost" aria-hidden="true">سهل</div>
 
 <header class="site-header">
   <div class="header-inner container">
@@ -498,17 +484,6 @@ const io = new IntersectionObserver(es => es.forEach(e => {
 }), { threshold: .08 });
 document.querySelectorAll(".r").forEach(el => io.observe(el));
 
-/* ghost drift */
-const ghost = document.querySelector(".ghost");
-let ticking = false;
-window.addEventListener("scroll", () => {
-  if (ticking) return;
-  ticking = true;
-  requestAnimationFrame(() => {
-    ghost.style.transform = `translateY(calc(-50% + ${window.scrollY * -0.05}px))`;
-    ticking = false;
-  });
-}, { passive: true });
 </script>
 
 </body>
