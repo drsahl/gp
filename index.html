@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="icgp.sahl.ie — the trainee. The Mid-West GP training year at a glance: next day release, the radar, the full Wednesday register.">
+<meta name="theme-color" content="#EFEBCE">
+<link rel="canonical" href="https://icgp.sahl.ie/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="icgp.sahl.ie">
+<meta property="og:title" content="the trainee — icgp.sahl.ie">
+<meta property="og:description" content="The training year at a glance. Next Wednesday, the radar, the whole register.">
+<meta property="og:url" content="https://icgp.sahl.ie/">
+<meta property="og:image" content="https://icgp.sahl.ie/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<title>the trainee — icgp.sahl.ie</title>
+<link rel="icon" type="image/png" href="crest-icon.png">
+<link rel="apple-touch-icon" href="crest-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper:      #EFEBCE;
+    --paper-deep: #E4DFC0;
+    --forest:     #064013;
+    --forest-90:  rgba(6,64,19,.9);
+    --forest-70:  rgba(6,64,19,.7);
+    --forest-40:  rgba(6,64,19,.4);
+    --forest-12:  rgba(6,64,19,.12);
+    --ink:        #101008;
+    --accent:     #B04A2F;
+    --serif:  'EB Garamond', Georgia, serif;
+    --sans:   'Inter', 'Helvetica Neue', sans-serif;
+    --ease:   cubic-bezier(.22,1,.36,1);
+    --gutter: clamp(1.4rem, 5vw, 3.5rem);
+    --measure: 760px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; background: var(--paper-deep); }
+  body {
+    background: linear-gradient(178deg, var(--paper) 0%, #EAE5C8 46%, var(--paper-deep) 100%);
+    background-attachment: fixed;
+    color: var(--ink);
+    font-family: var(--sans);
+    font-weight: 300;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection { background: var(--forest); color: var(--paper); }
+  a { color: var(--forest); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+  .container { max-width: 1120px; margin: 0 auto; padding: 0 var(--gutter); }
+  .reading { max-width: var(--measure); margin: 0 auto; padding: 0 var(--gutter); }
+
+  body::before {
+    content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 60;
+    background:
+      radial-gradient(ellipse 80% 60% at 20% 8%, rgba(255,255,255,.35), transparent 60%),
+      radial-gradient(ellipse 70% 50% at 85% 92%, rgba(6,64,19,.05), transparent 60%);
+  }
+
+  .ghost {
+    position: fixed; right: -5vw; top: 50%;
+    font-family: 'Amiri', serif; font-weight: 700;
+    font-size: 44vw; line-height: 1;
+    color: var(--forest); opacity: .025;
+    pointer-events: none; user-select: none; z-index: 0;
+    animation: breathe 9s ease-in-out infinite;
+    will-change: transform;
+  }
+  @keyframes breathe { 0%,100% { opacity: .02; } 50% { opacity: .034; } }
+
+  /* masthead */
+  .site-header {
+    position: sticky; top: 0; z-index: 40;
+    background: rgba(239,235,206,.86);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--forest-12);
+  }
+  .header-inner {
+    display: flex; align-items: center; gap: 1.4rem;
+    padding-top: .85rem; padding-bottom: .85rem;
+  }
+  .brand { display: flex; align-items: center; gap: .75em; text-decoration: none; color: var(--forest); }
+  .brand img { height: 2.1rem; width: auto; display: block; }
+  .brand-name { font-family: var(--serif); font-size: 1.18rem; line-height: 1.1; color: var(--forest-90); display: block; }
+  .brand-domain { font-size: .56rem; letter-spacing: .28em; text-transform: uppercase; color: var(--forest-40); display: block; margin-top: .15rem; }
+  .header-inner .tag { margin-inline-start: auto; font-size: .62rem; letter-spacing: .26em; text-transform: uppercase; color: var(--forest-40); }
+
+  main { position: relative; z-index: 1; }
+
+  .kicker { display: flex; align-items: baseline; gap: .9em; margin-bottom: 1.5rem; }
+  .kicker em { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 1.15rem; color: var(--accent); }
+  .kicker span { font-size: .62rem; letter-spacing: .3em; text-transform: uppercase; color: var(--forest-40); }
+
+  /* next up — the cockpit card that is not a card */
+  .next { padding: clamp(3.6rem, 10vh, 6.5rem) 0 clamp(2.4rem, 6vh, 3.6rem); }
+  .next .when { font-size: .68rem; letter-spacing: .26em; text-transform: uppercase; color: var(--forest-40); }
+  .next h1 {
+    margin-top: .7rem;
+    font-family: var(--serif); font-weight: 400;
+    font-size: clamp(2.6rem, 6vw, 4.4rem);
+    letter-spacing: -.01em; line-height: 1.08;
+    color: var(--forest-90);
+  }
+  .next .topic {
+    margin-top: 1.1rem; max-width: 40ch;
+    font-family: var(--serif); font-size: 1.3rem; line-height: 1.5;
+    color: var(--forest-70);
+  }
+  .next .meta { margin-top: 1.6rem; display: flex; gap: 2rem; flex-wrap: wrap; align-items: baseline; }
+  .next .meta .m { font-size: .68rem; letter-spacing: .2em; text-transform: uppercase; color: var(--forest-40); }
+  .next .meta .m b { display: block; margin-top: .3rem; font-weight: 500; letter-spacing: .04em; color: var(--forest-90); font-size: .85rem; text-transform: none; }
+  .count {
+    margin-top: 2.2rem; padding-top: 1.4rem;
+    border-top: 1px solid var(--forest-12);
+    font-family: var(--serif); font-style: italic; font-size: 1.15rem; color: var(--accent);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* sections */
+  .blk { padding: clamp(2.4rem, 6vh, 4rem) 0; border-top: 1px solid var(--forest-12); position: relative; }
+  .blk-title {
+    font-family: var(--serif); font-weight: 400;
+    font-size: clamp(1.6rem, 2.8vw, 2.1rem);
+    letter-spacing: -.005em; line-height: 1.2;
+    color: var(--forest-90); margin-bottom: 1.2rem;
+  }
+  .blk p.lead-in { max-width: 62ch; font-size: .9rem; line-height: 1.85; color: var(--forest-70); margin-bottom: 1.2rem; }
+
+  /* register rows — radar and year share the grammar */
+  .rows { border-top: 1px solid var(--forest-12); margin-top: 1.2rem; }
+  .r-row {
+    display: grid; grid-template-columns: 6.2rem 1fr auto;
+    gap: 1.3rem; align-items: baseline;
+    padding: 1rem 0; border-bottom: 1px solid var(--forest-12);
+  }
+  .r-row .d { font-family: var(--serif); font-size: 1.08rem; color: var(--ink); white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .r-row .w { font-size: .86rem; line-height: 1.65; color: var(--forest-70); }
+  .r-row .w b { color: var(--forest-90); font-weight: 500; }
+  .r-row .x { font-size: .68rem; letter-spacing: .14em; text-transform: uppercase; color: var(--forest-40); white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .r-row.past { opacity: .38; }
+  .r-row.today .d { color: var(--accent); font-style: italic; }
+
+  /* filter chips */
+  .filters { display: flex; gap: 1.6rem; margin-bottom: 1.4rem; flex-wrap: wrap; }
+  .filters button {
+    background: none; border: none; cursor: pointer; padding: 0 0 .25rem;
+    font-family: var(--sans); font-size: .68rem; font-weight: 500;
+    letter-spacing: .22em; text-transform: uppercase; color: var(--forest-40);
+    border-bottom: 1px solid transparent;
+    transition: color .35s var(--ease), border-color .35s var(--ease);
+  }
+  .filters button:hover { color: var(--forest); }
+  .filters button.on { color: var(--forest); border-bottom-color: var(--accent); }
+
+  /* pm rhythm — label/value lines */
+  .lv { border-top: 1px solid var(--forest-12); margin-top: 1rem; }
+  .lv-row {
+    display: flex; justify-content: space-between; align-items: baseline; gap: 1.6rem;
+    padding: .85rem 0; border-bottom: 1px solid var(--forest-12);
+  }
+  .lv-row .t { font-family: var(--serif); font-size: 1.05rem; color: var(--ink); font-variant-numeric: tabular-nums; white-space: nowrap; min-width: 4.5rem; }
+  .lv-row .v { font-size: .86rem; color: var(--forest-70); text-align: end; line-height: 1.6; }
+
+  /* tools + orgs — directory grammar */
+  .dir { border-top: 1px solid var(--forest-12); margin-top: 1rem; }
+  .d-row {
+    display: grid; grid-template-columns: minmax(8rem, 13rem) 1fr auto;
+    gap: 1.3rem; align-items: baseline;
+    padding: 1.05rem 0; border-bottom: 1px solid var(--forest-12);
+    text-decoration: none; color: inherit;
+  }
+  .d-row .mono {
+    font-family: var(--serif); font-weight: 500; font-size: 1.35rem; line-height: 1;
+    color: var(--forest-90); letter-spacing: .02em;
+    transition: transform .45s var(--ease);
+  }
+  a.d-row:hover .mono { transform: translateX(5px); color: var(--forest); }
+  .d-row .dd { font-size: .86rem; line-height: 1.65; color: var(--forest-70); }
+  .d-row .arr { color: var(--forest-40); font-family: var(--serif); font-size: 1.1rem; transition: transform .45s var(--ease), color .45s var(--ease); }
+  a.d-row:hover .arr { transform: translateX(5px); color: var(--forest); }
+
+  footer { margin-top: 4rem; border-top: 1px solid var(--forest-40); padding: 2.4rem 0 4rem; position: relative; z-index: 1; }
+  footer .wrap { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 1rem; }
+  footer .fine { font-size: .62rem; letter-spacing: .26em; text-transform: uppercase; color: var(--forest-40); }
+  footer .fine a { color: inherit; }
+  footer .src { font-size: .74rem; line-height: 1.7; color: var(--forest-70); max-width: 62ch; margin-top: 1.2rem; }
+
+  .r { opacity: 0; transform: translateY(22px); transition: opacity 1s var(--ease), transform 1s var(--ease); }
+  .r.on { opacity: 1; transform: none; }
+
+  @media (max-width: 700px) {
+    .ghost { font-size: 84vw; right: -24vw; }
+    .r-row { grid-template-columns: 4.6rem 1fr; }
+    .r-row .x { grid-column: 2; }
+    .d-row { grid-template-columns: 1fr; gap: .3rem; }
+    .d-row .arr { display: none; }
+    .lv-row .t { min-width: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { transition: none !important; animation: none !important; }
+    .r { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="ghost" aria-hidden="true">سهل</div>
+
+<header class="site-header">
+  <div class="header-inner container">
+    <a class="brand" href="https://sahl.ie"><img src="crest.png" alt="Sahl family crest"><span><span class="brand-name">the trainee</span><span class="brand-domain">icgp.sahl.ie</span></span></a>
+    <span class="tag">a sahl.ie room</span>
+  </div>
+</header>
+
+<main>
+  <section class="next">
+    <div class="reading">
+      <p class="kicker r"><em>01</em><span>next up</span></p>
+      <p class="when r" id="nextWhen">wednesday</p>
+      <h1 class="r" data-d="1" id="nextDate">…</h1>
+      <p class="topic r" data-d="2" id="nextTopic"></p>
+      <div class="meta r" data-d="3" id="nextMeta"></div>
+      <p class="count r" data-d="3" id="nextCount"></p>
+    </div>
+  </section>
+
+  <section class="blk">
+    <div class="reading">
+      <p class="kicker r"><em>02</em><span>the radar</span></p>
+      <h2 class="blk-title r">Dates with weight</h2>
+      <p class="lead-in r">The weeks that carry something extra: reviews, tests, conferences, the residential, CPC and RCPAC. Days left, counted.</p>
+      <div class="rows" id="radar"></div>
+    </div>
+  </section>
+
+  <section class="blk">
+    <div class="reading">
+      <p class="kicker r"><em>03</em><span>the year</span></p>
+      <h2 class="blk-title r">Every Wednesday, 2026–27</h2>
+      <div class="filters r" id="filters">
+        <button data-f="all" class="on">all</button>
+        <button data-f="teaching">teaching</button>
+        <button data-f="flagged">flagged</button>
+        <button data-f="break">breaks</button>
+      </div>
+      <div class="rows" id="year"></div>
+    </div>
+  </section>
+
+  <section class="blk">
+    <div class="reading">
+      <p class="kicker r"><em>04</em><span>the afternoon rhythm</span></p>
+      <h2 class="blk-title r">PM day release</h2>
+      <div class="lv" id="rhythm"></div>
+      <div class="dir" id="leads" style="margin-top:2rem"></div>
+    </div>
+  </section>
+
+  <section class="blk">
+    <div class="reading">
+      <p class="kicker r"><em>05</em><span>tools</span></p>
+      <h2 class="blk-title r">At the point of care</h2>
+      <div class="dir">
+        <a class="d-row r" href="https://www.mdcalc.com" target="_blank" rel="noopener">
+          <span class="mono">MDCalc</span>
+          <span class="dd">the calculators — eGFR, CHA₂DS₂-VASc, HAS-BLED, Wells, CURB-65, QRISK3.</span>
+          <span class="arr">→</span>
+        </a>
+        <a class="d-row r" href="https://antibioticprescribing.ie" target="_blank" rel="noopener">
+          <span class="mono">ABX</span>
+          <span class="dd">HSE antimicrobial prescribing guidelines — antibioticprescribing.ie.</span>
+          <span class="arr">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="blk">
+    <div class="reading">
+      <p class="kicker r"><em>06</em><span>the register</span></p>
+      <h2 class="blk-title r">Who is who</h2>
+      <div class="dir">
+        <a class="d-row r" href="https://www.icgp.ie" target="_blank" rel="noopener">
+          <span class="mono">ICGP</span>
+          <span class="dd">the college — ePortfolio, exams, CPD, the scheme itself.</span>
+          <span class="arr">→</span>
+        </a>
+        <a class="d-row r" href="https://www.medicalcouncil.ie" target="_blank" rel="noopener">
+          <span class="mono">IMC</span>
+          <span class="dd">registration, certificates, the roll.</span>
+          <span class="arr">→</span>
+        </a>
+        <a class="d-row r" href="https://www.pcrs.ie" target="_blank" rel="noopener">
+          <span class="mono">PCRS</span>
+          <span class="dd">medical card and GP payments administration.</span>
+          <span class="arr">→</span>
+        </a>
+        <a class="d-row r" href="https://www.imo.ie" target="_blank" rel="noopener">
+          <span class="mono">IMO</span>
+          <span class="dd">the union — contracts, NCHD advocacy, disputes.</span>
+          <span class="arr">→</span>
+        </a>
+        <a class="d-row r" href="https://www.hse.ie" target="_blank" rel="noopener">
+          <span class="mono">HSE</span>
+          <span class="dd">the employer — pay, leave, occupational health.</span>
+          <span class="arr">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="wrap">
+      <span class="fine">icgp.sahl.ie · 2026</span>
+      <span class="fine"><a href="https://sahl.ie">a sahl.ie room</a></span>
+    </div>
+    <p class="src">Parsed from the Mid-West 2026–27 day-release schedule (UL) on 23 August 2026. The source document moves — scheme channels win any disagreement. Built for one trainee; useful to all of them.</p>
+  </div>
+</footer>
+
+<script>
+const CAL = {
+  "source": "Day Release Schedule LIVE (2026-27) — Mid-West GP Training (UL), parsed 2026-08-23",
+  "note": "The source PDF moves. Check scheme channels for last-minute changes.",
+  "weeks": [
+    { "date": "2026-07-15", "release": true,  "onsite": "yes",   "topic": "Curriculum planning", "lead": "", "note": "", "flag": "teaching" },
+    { "date": "2026-07-22", "release": true,  "onsite": "yes",   "topic": "Uncertainty of cases", "lead": "Colette & Andy", "note": "3rd years only AM; PM self-directed / blended", "flag": "teaching" },
+    { "date": "2026-07-29", "release": true,  "onsite": "yes",   "topic": "Audit and research", "lead": "Paul", "note": "3rd years only AM; PM self-directed / blended", "flag": "teaching" },
+    { "date": "2026-08-05", "release": false, "onsite": "no",    "topic": "", "lead": "", "note": "", "flag": "break" },
+    { "date": "2026-08-12", "release": false, "onsite": "no",    "topic": "", "lead": "", "note": "", "flag": "break" },
+    { "date": "2026-08-19", "release": false, "onsite": "no",    "topic": "", "lead": "", "note": "", "flag": "break" },
+    { "date": "2026-08-26", "release": false, "onsite": "no",    "topic": "", "lead": "", "note": "", "flag": "break" },
+    { "date": "2026-09-02", "release": false, "onsite": "no",    "topic": "", "lead": "", "note": "SD team curriculum planning", "flag": "break" },
+    { "date": "2026-09-09", "release": true,  "onsite": "yes",   "topic": "Smear — external speaker", "lead": "", "note": "All 3rd years; 4th years PRN", "flag": "teaching" },
+    { "date": "2026-09-16", "release": true,  "onsite": "yes",   "topic": "Emergencies", "lead": "PS", "note": "", "flag": "teaching" },
+    { "date": "2026-09-23", "release": true,  "onsite": "few",   "topic": "Residential", "lead": "", "note": "Tuesday night overnight, 3rd & 4th years", "flag": "residential" },
+    { "date": "2026-09-30", "release": true,  "onsite": "yes",   "topic": "MSK", "lead": "MC", "note": "", "flag": "teaching" },
+    { "date": "2026-10-07", "release": true,  "onsite": "yes",   "topic": "Personal development & teamwork", "lead": "", "note": "First Wednesday after semester change", "flag": "semester" },
+    { "date": "2026-10-14", "release": true,  "onsite": "yes",   "topic": "Emergencies", "lead": "PS", "note": "", "flag": "teaching" },
+    { "date": "2026-10-21", "release": true,  "onsite": "yes",   "topic": "", "lead": "", "note": "", "flag": "teaching" },
+    { "date": "2026-10-28", "release": true,  "onsite": "few",   "topic": "", "lead": "", "note": "", "flag": "teaching" },
+    { "date": "2026-11-04", "release": true,  "onsite": "yes",   "topic": "MSK", "lead": "MC", "note": "SJT / CPST tests", "flag": "tests" },
+    { "date": "2026-11-11", "release": false, "onsite": "no",    "topic": "", "lead": "", "note": "Trainee conference", "flag": "conference" },
+    { "date": "2026-11-18", "release": true,  "onsite": "yes",   "topic": "", "lead": "", "note": "", "flag": "teaching" },
+    { "date": "2026-11-25", "release": true,  "onsite": "mixed", "topic": "", "lead": "", "note": "Primary reviews — onsite for reviews, then blended learning", "flag": "reviews" },
+    { "date": "2026-12-02", "release": false, "onsite": "no",    "topic": "", "lead": "", "note": "CPC", "flag": "cpc" },
+    { "date": "2026-12-09", "release": true,  "onsite": "yes",   "topic": "Career development", "lead": "", "note": "RCPAC", "flag": "rcpac" },
+    { "date": "2026-12-16", "release": true,  "onsite": "yes",   "topic": "Nuggets of knowledge", "lead": "MC", "note": "", "flag": "teaching" },
+    { "date": "2026-12-23", "release": false, "onsite": "no",    "topic": "", "lead": "", "note": "", "flag": "break" },
+    { "date": "2026-12-30", "release": false, "onsite": "no",    "topic": "", "lead": "", "note": "", "flag": "break" },
+    { "date": "2027-01-06", "release": true,  "onsite": "yes",   "topic": "Personal development & teamwork", "lead": "", "note": "First Wednesday after semester change", "flag": "semester" },
+    { "date": "2027-01-13", "release": true,  "onsite": "yes",   "topic": "", "lead": "", "note": "", "flag": "teaching" },
+    { "date": "2027-01-20", "release": true,  "onsite": "yes",   "topic": "Dermoscopy / cryotherapy", "lead": "PS", "note": "", "flag": "teaching" },
+    { "date": "2027-01-27", "release": true,  "onsite": "few",   "topic": "", "lead": "", "note": "", "flag": "teaching" },
+    { "date": "2027-02-03", "release": false, "onsite": "no",    "topic": "", "lead": "", "note": "", "flag": "break" },
+    { "date": "2027-02-10", "release": true,  "onsite": "yes",   "topic": "", "lead": "", "note": "", "flag": "teaching" },
+    { "date": "2027-02-17", "release": true,  "onsite": "few",   "topic": "", "lead": "", "note": "", "flag": "teaching" },
+    { "date": "2027-02-24", "release": true,  "onsite": "yes",   "topic": "", "lead": "", "note": "", "flag": "teaching" },
+    { "date": "2027-03-03", "release": true,  "onsite": "yes",   "topic": "Concussion / sport injuries", "lead": "PS", "note": "New trainers & national trainers workshop", "flag": "teaching" },
+    { "date": "2027-03-10", "release": true,  "onsite": "yes",   "topic": "", "lead": "", "note": "", "flag": "teaching" },
+    { "date": "2027-03-17", "release": false, "onsite": "no",    "topic": "", "lead": "", "note": "", "flag": "break" },
+    { "date": "2027-03-24", "release": true,  "onsite": "few",   "topic": "", "lead": "", "note": "", "flag": "teaching" },
+    { "date": "2027-03-31", "release": false, "onsite": "no",    "topic": "", "lead": "", "note": "", "flag": "break" },
+    { "date": "2027-04-07", "release": true,  "onsite": "yes",   "topic": "", "lead": "", "note": "", "flag": "teaching" },
+    { "date": "2027-04-14", "release": true,  "onsite": "few",   "topic": "", "lead": "", "note": "", "flag": "teaching" },
+    { "date": "2027-04-21", "release": true,  "onsite": "yes",   "topic": "Personal development & teamwork", "lead": "", "note": "First Wednesday after semester change", "flag": "semester" },
+    { "date": "2027-04-28", "release": true,  "onsite": "yes",   "topic": "", "lead": "", "note": "", "flag": "teaching" },
+    { "date": "2027-05-05", "release": true,  "onsite": "yes",   "topic": "Dermoscopy", "lead": "PS", "note": "Year 4: palliative care for GP", "flag": "teaching" },
+    { "date": "2027-05-12", "release": true,  "onsite": "yes",   "topic": "", "lead": "", "note": "", "flag": "teaching" },
+    { "date": "2027-05-19", "release": true,  "onsite": "few",   "topic": "", "lead": "", "note": "", "flag": "teaching" },
+    { "date": "2027-05-26", "release": true,  "onsite": "yes",   "topic": "", "lead": "", "note": "", "flag": "teaching" },
+    { "date": "2027-06-02", "release": false, "onsite": "no",    "topic": "", "lead": "", "note": "CPC", "flag": "cpc" },
+    { "date": "2027-06-09", "release": true,  "onsite": "yes",   "topic": "Cardiometabolic / lifestyle", "lead": "PS", "note": "", "flag": "teaching" },
+    { "date": "2027-06-16", "release": true,  "onsite": "few",   "topic": "Cardiometabolic / lifestyle", "lead": "PS", "note": "RCPAC", "flag": "rcpac" },
+    { "date": "2027-06-23", "release": true,  "onsite": "yes",   "topic": "Challenging cases in GP", "lead": "TC", "note": "", "flag": "teaching" },
+    { "date": "2027-06-30", "release": true,  "onsite": "yes",   "topic": "", "lead": "", "note": "", "flag": "teaching" },
+    { "date": "2027-07-07", "release": true,  "onsite": "yes",   "topic": "", "lead": "", "note": "", "flag": "teaching" },
+    { "date": "2027-07-14", "release": true,  "onsite": "yes",   "topic": "", "lead": "", "note": "Likely mirrors last year", "flag": "teaching" },
+    { "date": "2027-07-21", "release": true,  "onsite": "yes",   "topic": "", "lead": "", "note": "Likely mirrors last year", "flag": "teaching" },
+    { "date": "2027-07-28", "release": true,  "onsite": "yes",   "topic": "", "lead": "", "note": "Likely mirrors last year", "flag": "teaching" }
+  ],
+  "pmRhythm": [
+    { "time": "14:00", "what": "Journal, debrief, interesting cases" },
+    { "time": "14:30", "what": "First topic" },
+    { "time": "15:45", "what": "Second topic, as applicable" },
+    { "time": "16:45", "what": "Small-group summation" },
+    { "time": "",      "what": "Plenary on some weeks — lecture theatre / 028" }
+  ],
+  "leads": [
+    { "who": "Dr Brian McEllistrem", "what": "Plenary" },
+    { "who": "Dr Tess O'Sullivan",   "what": "Blended learning" },
+    { "who": "Dr Paul Scully",       "what": "Audit" }
+  ],
+  "radarFlags": ["residential", "conference", "tests", "reviews", "cpc", "rcpac", "semester"]
+};
+</script>
+<script>
+const $ = id => document.getElementById(id);
+const DAY = 86400000;
+const today = new Date(); today.setHours(0,0,0,0);
+
+const MONTHS = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+const MON3 = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+const parse = s => { const d = new Date(s + "T00:00:00"); return d; };
+const fmtLong = d => `${d.getDate()} ${MONTHS[d.getMonth()]} ${d.getFullYear()}`;
+const fmtShort = d => `${d.getDate()} ${MON3[d.getMonth()]}`;
+
+const onsiteLabel = { yes: "onsite · UL", few: "mostly online", mixed: "reviews, then blended", no: "no release" };
+
+/* ---- next up ---- */
+const future = CAL.weeks.filter(w => parse(w.date) >= today);
+const nextW = future[0];
+if (nextW) {
+  const d = parse(nextW.date);
+  const n = Math.round((d - today) / DAY);
+  $("nextWhen").textContent = n === 0 ? "today" : n === 1 ? "tomorrow" : `in ${n} days`;
+  $("nextDate").textContent = fmtLong(d);
+  if (nextW.release) {
+    $("nextTopic").textContent = nextW.topic
+      ? nextW.topic + (nextW.lead ? ` — ${nextW.lead}` : "")
+      : "day release";
+    $("nextMeta").innerHTML =
+      `<span class="m">onsite<b>${onsiteLabel[nextW.onsite] || ""}</b></span>` +
+      (nextW.note ? `<span class="m">note<b>${nextW.note}</b></span>` : "");
+    $("nextCount").textContent = "teaching wednesday";
+  } else {
+    $("nextTopic").textContent = nextW.note ? `no day release — ${nextW.note.toLowerCase()}` : "no day release";
+    const nextTeach = future.find(w => w.release);
+    $("nextMeta").innerHTML = "";
+    $("nextCount").textContent = nextTeach
+      ? `next teaching: wed ${fmtShort(parse(nextTeach.date))}${nextTeach.topic ? " · " + nextTeach.topic : ""}`
+      : "";
+  }
+}
+
+/* ---- radar ---- */
+const radarRows = CAL.weeks
+  .filter(w => CAL.radarFlags.includes(w.flag) && parse(w.date) >= today)
+  .map(w => {
+    const d = parse(w.date);
+    const n = Math.round((d - today) / DAY);
+    const label = { residential: "residential", conference: "conference", tests: "tests", reviews: "reviews", cpc: "cpc", rcpac: "rcpac", semester: "semester turn" }[w.flag] || w.flag;
+    const what = w.topic || w.note || label;
+    const extra = w.topic && w.note ? ` — ${w.note}` : "";
+    return `<div class="r-row"><span class="d">${fmtShort(d)}</span><span class="w"><b>${what}${extra}</b></span><span class="x">${n === 0 ? "today" : n === 1 ? "tomorrow" : "in " + n + " days"}</span></div>`;
+  }).join("");
+$("radar").innerHTML = radarRows || `<div class="r-row"><span class="w">nothing flagged ahead — the year is done.</span></div>`;
+
+/* ---- the year ---- */
+function renderYear(filter) {
+  $("year").innerHTML = CAL.weeks
+    .filter(w => {
+      if (filter === "all") return true;
+      if (filter === "break") return w.flag === "break";
+      if (filter === "flagged") return CAL.radarFlags.includes(w.flag);
+      return w.flag === "teaching";
+    })
+    .map(w => {
+      const d = parse(w.date);
+      const isPast = d < today;
+      const isToday = d.getTime() === today.getTime();
+      const what = w.release
+        ? (w.topic ? `<b>${w.topic}</b>` + (w.lead ? ` — ${w.lead}` : "") : "<b>day release</b>")
+        : `<b>no release</b>` + (w.note ? ` — ${w.note}` : "");
+      const note = w.release && w.note ? ` <span style="color:var(--forest-40)">${w.note}</span>` : "";
+      return `<div class="r-row${isPast ? " past" : ""}${isToday ? " today" : ""}">
+        <span class="d">${fmtShort(d)}</span>
+        <span class="w">${what}${note}</span>
+        <span class="x">${w.release ? (onsiteLabel[w.onsite] || "") : (w.flag === "break" ? "break" : "")}</span>
+      </div>`;
+    }).join("");
+}
+renderYear("all");
+$("filters").addEventListener("click", e => {
+  const b = e.target.closest("button"); if (!b) return;
+  document.querySelectorAll("#filters button").forEach(x => x.classList.toggle("on", x === b));
+  renderYear(b.dataset.f);
+});
+
+/* ---- rhythm + leads ---- */
+$("rhythm").innerHTML = CAL.pmRhythm
+  .map(r => `<div class="lv-row"><span class="t">${r.time || ""}</span><span class="v">${r.what}</span></div>`).join("");
+$("leads").innerHTML = CAL.leads
+  .map(l => `<div class="d-row" style="text-decoration:none"><span class="mono" style="font-size:1.1rem">${l.who}</span><span class="dd">${l.what}</span><span></span></div>`).join("");
+
+/* ---- reveals ---- */
+const io = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) { e.target.classList.add("on"); io.unobserve(e.target); }
+}), { threshold: .08 });
+document.querySelectorAll(".r").forEach(el => io.observe(el));
+
+/* ghost drift */
+const ghost = document.querySelector(".ghost");
+let ticking = false;
+window.addEventListener("scroll", () => {
+  if (ticking) return;
+  ticking = true;
+  requestAnimationFrame(() => {
+    ghost.style.transform = `translateY(calc(-50% + ${window.scrollY * -0.05}px))`;
+    ticking = false;
+  });
+}, { passive: true });
+</script>
+
+</body>
+</html>
