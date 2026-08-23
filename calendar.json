@@ -1,5 +1,5 @@
 {
-  "source": "Day Release Schedule LIVE (2026-27) — Mid-West GP Training (UL), parsed 2026-08-23",
+  "source": "Day Release Schedule LIVE (2026-27), Mid-West GP Training (UL), parsed 2026-08-23",
   "note": "The source PDF moves. Check scheme channels for last-minute changes.",
   "weeks": [
     { "date": "2026-07-15", "release": true,  "onsite": "yes",   "topic": "Curriculum planning", "lead": "", "note": "", "flag": "teaching" },
@@ -10,7 +10,7 @@
     { "date": "2026-08-19", "release": false, "onsite": "no",    "topic": "", "lead": "", "note": "", "flag": "break" },
     { "date": "2026-08-26", "release": false, "onsite": "no",    "topic": "", "lead": "", "note": "", "flag": "break" },
     { "date": "2026-09-02", "release": false, "onsite": "no",    "topic": "", "lead": "", "note": "SD team curriculum planning", "flag": "break" },
-    { "date": "2026-09-09", "release": true,  "onsite": "yes",   "topic": "Smear — external speaker", "lead": "", "note": "All 3rd years; 4th years PRN", "flag": "teaching" },
+    { "date": "2026-09-09", "release": true,  "onsite": "yes",   "topic": "Smear · external speaker", "lead": "", "note": "All 3rd years; 4th years PRN", "flag": "teaching" },
     { "date": "2026-09-16", "release": true,  "onsite": "yes",   "topic": "Emergencies", "lead": "PS", "note": "", "flag": "teaching" },
     { "date": "2026-09-23", "release": true,  "onsite": "few",   "topic": "Residential", "lead": "", "note": "Tuesday night overnight, 3rd & 4th years", "flag": "residential" },
     { "date": "2026-09-30", "release": true,  "onsite": "yes",   "topic": "MSK", "lead": "MC", "note": "", "flag": "teaching" },
@@ -21,7 +21,7 @@
     { "date": "2026-11-04", "release": true,  "onsite": "yes",   "topic": "MSK", "lead": "MC", "note": "SJT / CPST tests", "flag": "tests" },
     { "date": "2026-11-11", "release": false, "onsite": "no",    "topic": "", "lead": "", "note": "Trainee conference", "flag": "conference" },
     { "date": "2026-11-18", "release": true,  "onsite": "yes",   "topic": "", "lead": "", "note": "", "flag": "teaching" },
-    { "date": "2026-11-25", "release": true,  "onsite": "mixed", "topic": "", "lead": "", "note": "Primary reviews — onsite for reviews, then blended learning", "flag": "reviews" },
+    { "date": "2026-11-25", "release": true,  "onsite": "mixed", "topic": "", "lead": "", "note": "Primary reviews · onsite for reviews, then blended", "flag": "reviews" },
     { "date": "2026-12-02", "release": false, "onsite": "no",    "topic": "", "lead": "", "note": "CPC", "flag": "cpc" },
     { "date": "2026-12-09", "release": true,  "onsite": "yes",   "topic": "Career development", "lead": "", "note": "RCPAC", "flag": "rcpac" },
     { "date": "2026-12-16", "release": true,  "onsite": "yes",   "topic": "Nuggets of knowledge", "lead": "MC", "note": "", "flag": "teaching" },
@@ -63,7 +63,7 @@
     { "time": "14:30", "what": "First topic" },
     { "time": "15:45", "what": "Second topic, as applicable" },
     { "time": "16:45", "what": "Small-group summation" },
-    { "time": "",      "what": "Plenary on some weeks — lecture theatre / 028" }
+    { "time": "",      "what": "Plenary on some weeks, lecture theatre / 028" }
   ],
   "leads": [
     { "who": "Dr Brian McEllistrem", "what": "Plenary" },

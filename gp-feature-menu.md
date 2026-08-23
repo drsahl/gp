@@ -4,13 +4,17 @@ The trainee's home on the internet. You come here first: lost, unsure of a diagn
 
 ## 0. The architecture (decided by the owner, 2026-08-23)
 
-- Repo `drsahl/gp` is **private** (done today). Code is no longer public.
-- Hosting moves from GitHub Pages to **Cloudflare Pages** (free tier builds from private repos; no build step, output `/`).
-- Login is **Cloudflare Access** in front of the site: SSO via **Google and Apple** only (both are built-in Access identity providers; no passwords exist to leak). Users are managed in the Cloudflare Zero Trust dashboard — an email allow-list, one screen, no code. Free tier covers up to 50 users.
-- One prerequisite: Cloudflare Access protects hostnames whose DNS runs through Cloudflare, so the sahl.ie zone moves to Cloudflare nameservers. Every existing record is documented (rebuild.md §2.1) and gets recreated first — Zoho MX, SPF, DKIM, zoho-verification, google-site-verification, the four GitHub A records, and the education/www CNAMEs — verified with dig before the Blacknight nameserver flip. Mail and both live sites are untouched by a correct recreation.
-- Sequenced so nothing live ever breaks: Cloudflare zone recreated → verify records → flip nameservers → connect Pages to the private repo → Access policy (Google + Apple, email allow-list) → DNS for gp → done.
+* Repo `drsahl/gp` is **private** (done today). Code is no longer public.
 
----
+* Hosting moves from GitHub Pages to **Cloudflare Pages** (free tier builds from private repos; no build step, output `/`).
+
+* Login is **Cloudflare Access** in front of the site: SSO via **Google and Apple** only (both are built-in Access identity providers; no passwords exist to leak). Users are managed in the Cloudflare Zero Trust dashboard — an email allow-list, one screen, no code. Free tier covers up to 50 users.
+
+* One prerequisite: Cloudflare Access protects hostnames whose DNS runs through Cloudflare, so the sahl.ie zone moves to Cloudflare nameservers. Every existing record is documented (rebuild.md §2.1) and gets recreated first — Zoho MX, SPF, DKIM, zoho-verification, google-site-verification, the four GitHub A records, and the education/www CNAMEs — verified with dig before the Blacknight nameserver flip. Mail and both live sites are untouched by a correct recreation.
+
+* Sequenced so nothing live ever breaks: Cloudflare zone recreated → verify records → flip nameservers → connect Pages to the private repo → Access policy (Google + Apple, email allow-list) → DNS for gp → done.
+
+***
 
 ## A. Identity and access (8)
 
@@ -114,6 +118,7 @@ The trainee's home on the internet. You come here first: lost, unsure of a diagn
 74. Focus type scales: the timer is big and calm; the atlas is dense and FT-like. Each view maximised for its job, desktop and mobile.
 75. The colophon row: "built by a trainee, for trainees" — one line in the footer, dated.
 
----
+***
 
 *Reply with yays and nays — per line, per group, or "A, C, D, G all in; trim the rest". The architecture in §0 proceeds on your word; the Cloudflare dashboard steps are one screen each and I will walk them with you.*
+
