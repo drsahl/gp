@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="gp.sahl.ie · the trainee. The clinic timer, the year, the atlas. Come here first.">
-<meta name="theme-color" content="#EFEBCE">
+<meta name="theme-color" content="#EFEBCE" id="themeMeta">
 <link rel="canonical" href="https://gp.sahl.ie/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="gp.sahl.ie">
@@ -33,10 +33,11 @@
     --forest-12:  rgba(6,64,19,.12);
     --ink:        #101008;
     --accent:     #B04A2F;
+    --olive:      #7A6A2F;
     --serif:  'EB Garamond', Georgia, serif;
     --sans:   'Inter', 'Helvetica Neue', sans-serif;
     --ease:   cubic-bezier(.22,1,.36,1);
-    --gutter: clamp(1.4rem, 5vw, 3.5rem);
+    --gutter: clamp(1.2rem, 4vw, 3rem);
     --measure: 780px;
   }
   html.lamp {
@@ -49,6 +50,7 @@
     --forest-12:  rgba(228,223,192,.14);
     --ink:        #F1EDDA;
     --accent:     #D97B5C;
+    --olive:      #A89967;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; background: var(--paper-deep); }
@@ -65,7 +67,7 @@
   ::selection { background: var(--forest); color: var(--paper); }
   a { color: var(--forest); text-decoration-thickness: 1px; text-underline-offset: 3px; }
   button { font-family: inherit; }
-  .container { max-width: 1120px; margin: 0 auto; padding: 0 var(--gutter); }
+  .container { max-width: 1240px; margin: 0 auto; padding: 0 var(--gutter); }
   .reading { max-width: var(--measure); margin: 0 auto; padding: 0 var(--gutter); }
 
   body::before {
@@ -94,7 +96,7 @@
   .brand-domain #gpSpin { display: inline-block; transition: opacity .6s var(--ease); }
   .brand-domain #gpSpin.fade { opacity: 0; }
   .hdr-search {
-    flex: 1; max-width: 340px; margin-inline-start: auto;
+    flex: 1; max-width: 320px; margin-inline-start: auto;
     appearance: none; border: 1px solid var(--forest-12); border-radius: 980px;
     background: transparent; padding: .45rem 1rem;
     font-family: var(--sans); font-size: .8rem; color: var(--ink);
@@ -114,132 +116,160 @@
   main { position: relative; z-index: 1; }
   .view[hidden] { display: none; }
 
-  .kicker { display: flex; align-items: baseline; gap: .9em; margin-bottom: 1.4rem; }
-  .kicker em { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 1.15rem; color: var(--accent); }
+  .kicker { display: flex; align-items: baseline; gap: .9em; margin-bottom: 1.2rem; }
+  .kicker em { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 1.1rem; color: var(--accent); }
   .kicker span { font-size: .62rem; letter-spacing: .3em; text-transform: uppercase; color: var(--forest-40); }
-  .blk { padding: clamp(2.2rem, 5.5vh, 3.6rem) 0; border-top: 1px solid var(--forest-12); }
-  .blk-title { font-family: var(--serif); font-weight: 400; font-size: clamp(1.55rem, 2.6vw, 2rem); letter-spacing: -.005em; line-height: 1.2; color: var(--forest-90); margin-bottom: 1rem; }
-  .lead-in { max-width: 62ch; font-size: .9rem; line-height: 1.85; color: var(--forest-70); margin-bottom: 1.1rem; }
+  .blk { padding: clamp(1.8rem, 4.5vh, 3rem) 0; border-top: 1px solid var(--forest-12); }
+  .blk-title { font-family: var(--serif); font-weight: 400; font-size: clamp(1.45rem, 2.4vw, 1.85rem); letter-spacing: -.005em; line-height: 1.2; color: var(--forest-90); margin-bottom: .9rem; }
+  .lead-in { max-width: 62ch; font-size: .88rem; line-height: 1.8; color: var(--forest-70); margin-bottom: 1rem; }
 
-  /* ---------- next up ---------- */
-  .next { padding: clamp(2.8rem, 8vh, 5rem) 0 clamp(2rem, 5vh, 3rem); }
-  .next .when { font-size: .68rem; letter-spacing: .26em; text-transform: uppercase; color: var(--forest-40); }
-  .next h1 { margin-top: .6rem; font-family: var(--serif); font-weight: 400; font-size: clamp(2.4rem, 5.6vw, 4rem); letter-spacing: -.01em; line-height: 1.08; color: var(--forest-90); }
-  .next .topic { margin-top: .9rem; max-width: 42ch; font-family: var(--serif); font-size: 1.25rem; line-height: 1.5; color: var(--forest-70); }
-  .count { margin-top: 1.6rem; padding-top: 1.2rem; border-top: 1px solid var(--forest-12); font-family: var(--serif); font-style: italic; font-size: 1.12rem; color: var(--accent); font-variant-numeric: tabular-nums; }
+  /* ---------- the dashboard ---------- */
+  .dash { padding: clamp(1.8rem, 4vh, 3rem) 0 0; }
+  .dash-grid { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 0 clamp(2rem, 4vw, 3.5rem); }
+  .dcol + .dcol { border-inline-start: 1px solid var(--forest-12); padding-inline-start: clamp(1.6rem, 3vw, 2.6rem); }
+  .dhead { font-size: .62rem; letter-spacing: .3em; text-transform: uppercase; color: var(--forest-40); margin-bottom: 1rem; display: flex; gap: .8em; align-items: baseline; }
+  .dhead em { font-family: var(--serif); font-style: italic; font-size: 1.05rem; color: var(--accent); letter-spacing: 0; text-transform: none; }
+
+  .next-when { font-size: .66rem; letter-spacing: .24em; text-transform: uppercase; color: var(--forest-40); }
+  .next-date { margin-top: .5rem; font-family: var(--serif); font-weight: 400; font-size: clamp(1.9rem, 3.4vw, 2.8rem); letter-spacing: -.01em; line-height: 1.1; color: var(--forest-90); }
+  .next-topic { margin-top: .7rem; font-family: var(--serif); font-size: 1.1rem; line-height: 1.5; color: var(--forest-70); max-width: 38ch; }
+  .next-count { margin-top: 1.1rem; padding-top: .9rem; border-top: 1px solid var(--forest-12); font-family: var(--serif); font-style: italic; font-size: 1.05rem; color: var(--accent); font-variant-numeric: tabular-nums; }
+
+  .qnav { display: flex; flex-wrap: wrap; gap: 1.2rem; margin-top: 1.6rem; }
+  .qnav a, .qnav button {
+    font-size: .66rem; font-weight: 500; letter-spacing: .2em; text-transform: uppercase;
+    color: var(--forest-70); text-decoration: none; background: none; border: none; cursor: pointer;
+    padding-bottom: .2rem; border-bottom: 1px solid var(--forest-12);
+    transition: color .35s var(--ease), border-color .35s var(--ease);
+  }
+  .qnav a:hover, .qnav button:hover { color: var(--forest); border-bottom-color: var(--accent); }
 
   /* ---------- register rows ---------- */
-  .rows { border-top: 1px solid var(--forest-12); margin-top: 1rem; }
-  .r-row { display: grid; grid-template-columns: 5.6rem 1fr auto; gap: 1.2rem; align-items: baseline; padding: .9rem 0; border-bottom: 1px solid var(--forest-12); }
-  .r-row .d { font-family: var(--serif); font-size: 1.05rem; color: var(--ink); white-space: nowrap; font-variant-numeric: tabular-nums; }
-  .r-row .w { font-size: .85rem; line-height: 1.65; color: var(--forest-70); }
+  .rows { border-top: 1px solid var(--forest-12); margin-top: .8rem; }
+  .r-row { display: grid; grid-template-columns: 4.6rem 1fr auto; gap: 1rem; align-items: baseline; padding: .7rem 0; border-bottom: 1px solid var(--forest-12); }
+  .r-row .d { font-family: var(--serif); font-size: 1rem; color: var(--ink); white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .r-row .w { font-size: .82rem; line-height: 1.6; color: var(--forest-70); }
   .r-row .w b { color: var(--forest-90); font-weight: 500; }
-  .r-row .x { font-size: .66rem; letter-spacing: .14em; text-transform: uppercase; color: var(--forest-40); white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .r-row .x { font-size: .64rem; letter-spacing: .12em; text-transform: uppercase; color: var(--forest-40); white-space: nowrap; font-variant-numeric: tabular-nums; }
   .r-row.past { opacity: .38; }
   .r-row.today .d { color: var(--accent); font-style: italic; }
-  .r-row .w .readlink { margin-inline-start: .6em; font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: var(--forest-40); text-decoration: none; border-bottom: 1px solid var(--forest-12); }
+  .r-row .w .readlink { margin-inline-start: .6em; font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; color: var(--forest-40); text-decoration: none; border-bottom: 1px solid var(--forest-12); }
   .r-row .w .readlink:hover { color: var(--forest); }
-
-  /* stream */
   .stream .new-dot { display: inline-block; width: .42em; height: .42em; border-radius: 50%; background: var(--accent); margin-inline-end: .7em; transform: translateY(-.12em); }
 
+  /* ---------- month calendar ---------- */
+  .moncal { margin-top: .4rem; }
+  .moncal .mh { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: .7rem; }
+  .moncal .mh .mn { font-family: var(--serif); font-size: 1.15rem; color: var(--forest-90); }
+  .moncal .mh button { background: none; border: none; cursor: pointer; color: var(--forest-40); font-size: 1rem; padding: 0 .4rem; }
+  .moncal .mh button:hover { color: var(--forest); }
+  .moncal .mgrid { display: grid; grid-template-columns: repeat(7, 1fr); border-top: 1px solid var(--forest-12); border-inline-start: 1px solid var(--forest-12); }
+  .moncal .mgrid .dh { font-size: .56rem; letter-spacing: .16em; text-transform: uppercase; color: var(--forest-40); padding: .4rem .1rem; border-bottom: 1px solid var(--forest-12); }
+  .moncal .mcell { min-height: 2.5rem; padding: .3rem .2rem .35rem .35rem; font-size: .72rem; color: var(--forest-70); border-bottom: 1px solid var(--forest-12); border-inline-end: 1px solid var(--forest-12); position: relative; font-variant-numeric: tabular-nums; }
+  .moncal .mcell.dim { color: var(--forest-40); opacity: .45; }
+  .moncal .mcell.today { color: var(--accent); font-weight: 500; }
+  .moncal .mcell .dot { position: absolute; bottom: .35rem; left: .35rem; width: .4rem; height: .4rem; border-radius: 50%; }
+  .moncal .mcell .dot.t { background: var(--forest); }
+  .moncal .mcell .dot.f { background: var(--accent); }
+  .moncal .mcell .dot.b { border: 1px solid var(--forest-40); background: none; }
+  .moncal .mcell.wed { cursor: pointer; }
+  .moncal .mcell.wed:hover { background: rgba(6,64,19,.04); }
+  html.lamp .moncal .mcell.wed:hover { background: rgba(228,223,192,.06); }
+  .moncal .mcell.sel { box-shadow: inset 0 0 0 1px var(--accent); }
+  .moncal .wk { margin-top: .9rem; padding-top: .8rem; border-top: 1px solid var(--forest-12); font-size: .84rem; line-height: 1.65; color: var(--forest-70); }
+  .moncal .wk b { color: var(--forest-90); font-weight: 500; }
+  .moncal .legend { display: flex; gap: 1.4rem; margin-top: .8rem; font-size: .64rem; letter-spacing: .12em; text-transform: uppercase; color: var(--forest-40); }
+  .moncal .legend .dot { display: inline-block; width: .4rem; height: .4rem; border-radius: 50%; margin-inline-end: .5em; }
+
   /* chips */
-  .chips { display: flex; gap: 1.4rem; margin-bottom: 1.2rem; flex-wrap: wrap; }
-  .chips button {
-    background: none; border: none; cursor: pointer; padding: 0 0 .25rem;
-    font-size: .68rem; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: var(--forest-40);
-    border-bottom: 1px solid transparent; transition: color .35s var(--ease), border-color .35s var(--ease);
-  }
+  .chips { display: flex; gap: 1.3rem; margin-bottom: 1rem; flex-wrap: wrap; }
+  .chips button { background: none; border: none; cursor: pointer; padding: 0 0 .25rem; font-size: .66rem; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: var(--forest-40); border-bottom: 1px solid transparent; transition: color .35s var(--ease), border-color .35s var(--ease); }
   .chips button:hover { color: var(--forest); }
   .chips button.on { color: var(--forest); border-bottom-color: var(--accent); }
 
   /* directory rows */
-  .dir { border-top: 1px solid var(--forest-12); margin-top: 1rem; }
-  .d-row { display: grid; grid-template-columns: minmax(7.5rem, 12rem) 1fr auto; gap: 1.2rem; align-items: baseline; padding: .95rem 0; border-bottom: 1px solid var(--forest-12); text-decoration: none; color: inherit; }
-  .d-row .mono { font-family: var(--serif); font-weight: 500; font-size: 1.25rem; line-height: 1.1; color: var(--forest-90); transition: transform .45s var(--ease); }
+  .dir { border-top: 1px solid var(--forest-12); margin-top: .8rem; }
+  .d-row { display: grid; grid-template-columns: minmax(6.5rem, 10rem) 1fr auto; gap: 1.1rem; align-items: baseline; padding: .8rem 0; border-bottom: 1px solid var(--forest-12); text-decoration: none; color: inherit; }
+  .d-row .mono { font-family: var(--serif); font-weight: 500; font-size: 1.15rem; line-height: 1.1; color: var(--forest-90); transition: transform .45s var(--ease); }
   a.d-row:hover .mono { transform: translateX(5px); color: var(--forest); }
-  .d-row .dd { font-size: .85rem; line-height: 1.65; color: var(--forest-70); }
+  .d-row .dd { font-size: .82rem; line-height: 1.6; color: var(--forest-70); }
   .d-row .arr { color: var(--forest-40); font-family: var(--serif); transition: transform .45s var(--ease), color .45s var(--ease); }
   a.d-row:hover .arr { transform: translateX(5px); color: var(--forest); }
 
   /* lv rows */
-  .lv { border-top: 1px solid var(--forest-12); margin-top: 1rem; }
-  .lv-row { display: flex; justify-content: space-between; align-items: baseline; gap: 1.4rem; padding: .8rem 0; border-bottom: 1px solid var(--forest-12); }
-  .lv-row .t { font-family: var(--serif); font-size: 1.02rem; color: var(--ink); font-variant-numeric: tabular-nums; white-space: nowrap; min-width: 4.5rem; }
-  .lv-row .v { font-size: .85rem; color: var(--forest-70); text-align: end; line-height: 1.6; }
+  .lv { border-top: 1px solid var(--forest-12); margin-top: .8rem; }
+  .lv-row { display: flex; justify-content: space-between; align-items: baseline; gap: 1.4rem; padding: .75rem 0; border-bottom: 1px solid var(--forest-12); }
+  .lv-row .t { font-family: var(--serif); font-size: 1rem; color: var(--ink); font-variant-numeric: tabular-nums; white-space: nowrap; min-width: 4.5rem; }
+  .lv-row .v { font-size: .84rem; color: var(--forest-70); text-align: end; line-height: 1.6; }
 
-  /* search results */
   .sq { font-family: var(--serif); font-style: italic; font-size: 1.15rem; color: var(--forest-90); margin-bottom: .4rem; }
 
   /* ---------- clinic timer ---------- */
-  .clinic-head { padding: clamp(2.4rem, 7vh, 4.5rem) 0 1.4rem; }
-  .tm-actions { display: flex; gap: 1.8rem; align-items: baseline; flex-wrap: wrap; margin-top: 1.6rem; }
-  .tbtn {
-    background: none; border: none; cursor: pointer;
-    font-size: .72rem; font-weight: 500; letter-spacing: .22em; text-transform: uppercase;
-    color: var(--forest-70); padding-bottom: .25rem; border-bottom: 1px solid var(--forest-40);
-    transition: color .35s var(--ease), border-color .35s var(--ease);
-  }
+  .clinic-head { padding: clamp(2rem, 6vh, 4rem) 0 1.2rem; }
+  .tm-actions { display: flex; gap: 1.6rem; align-items: center; flex-wrap: wrap; margin-top: 1.5rem; }
+  .tbtn { background: none; border: none; cursor: pointer; font-size: .7rem; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: var(--forest-70); padding-bottom: .25rem; border-bottom: 1px solid var(--forest-40); transition: color .35s var(--ease), border-color .35s var(--ease); }
   .tbtn:hover { color: var(--forest); border-bottom-color: var(--forest); }
   .tbtn.primary { color: var(--accent); border-bottom-color: var(--accent); }
-  .tbtn.pulse { animation: tpulse 1.6s ease-in-out infinite; }
+  .tbtn.pulse { animation: tpulse 3s ease-in-out infinite; }
   @keyframes tpulse { 0%,100% { opacity: 1; } 50% { opacity: .45; } }
-  .tbtn.pulse { animation-duration: 3s; }
+  .tm-check { display: inline-flex; align-items: center; gap: .5em; font-size: .68rem; letter-spacing: .18em; text-transform: uppercase; color: var(--forest-40); cursor: pointer; }
+  .tm-check input { accent-color: var(--forest); }
 
-  .tm-big {
-    font-family: var(--serif); font-weight: 400;
-    font-size: clamp(3.4rem, 9vw, 6.5rem); line-height: 1;
-    color: var(--forest-90); font-variant-numeric: tabular-nums;
-    letter-spacing: -.01em;
-  }
-  .tm-sub { margin-top: .6rem; font-size: .7rem; letter-spacing: .24em; text-transform: uppercase; color: var(--forest-40); }
-  .tm-drift { margin-top: 1rem; font-family: var(--serif); font-style: italic; font-size: 1.1rem; color: var(--accent); font-variant-numeric: tabular-nums; }
+  .tm-big { font-family: var(--serif); font-weight: 400; font-size: clamp(3.2rem, 8.5vw, 6rem); line-height: 1; color: var(--forest-90); font-variant-numeric: tabular-nums; letter-spacing: -.01em; }
+  .tm-sub { margin-top: .6rem; font-size: .68rem; letter-spacing: .22em; text-transform: uppercase; color: var(--forest-40); }
+  .tm-drift { margin-top: .9rem; font-family: var(--serif); font-style: italic; font-size: 1.08rem; font-variant-numeric: tabular-nums; }
+  .tm-drift.over { color: var(--accent); }
+  .tm-drift.ahead { color: var(--olive); }
+  .tm-drift.ontime { color: var(--forest-70); }
 
-  .phasebar { display: flex; gap: 0; margin-top: 2rem; border-top: 1px solid var(--forest-40); }
-  .phasebar button {
-    flex: 1; background: none; border: none; cursor: pointer;
-    padding: .8rem 0 .6rem; border-bottom: 1px solid var(--forest-12);
-    font-size: .66rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase;
-    color: var(--forest-40); transition: color .35s var(--ease), border-color .35s var(--ease);
-  }
-  .phasebar button.on { color: var(--accent); border-bottom-color: var(--accent); }
+  .phasebar { display: flex; gap: 0; margin-top: 1.8rem; border-top: 1px solid var(--forest-40); }
+  .phasebar button { flex: 1; background: none; border: none; cursor: pointer; padding: .75rem 0 .55rem; border-bottom: 2px solid transparent; font-size: .64rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--forest-40); transition: color .35s var(--ease), border-color .35s var(--ease); }
+  .phasebar button.on[data-p="0"] { color: var(--forest); border-bottom-color: var(--forest); }
+  .phasebar button.on[data-p="1"] { color: var(--accent); border-bottom-color: var(--accent); }
+  .phasebar button.on[data-p="2"] { color: var(--olive); border-bottom-color: var(--olive); }
+  .phasebar button.on[data-p="3"] { color: var(--forest-70); border-bottom-color: var(--forest-70); }
 
-  .slotlist { border-top: 1px solid var(--forest-12); margin-top: 2rem; }
-  .slot { display: grid; grid-template-columns: 2.4rem 1fr 5rem auto; gap: 1rem; align-items: baseline; padding: .75rem 0; border-bottom: 1px solid var(--forest-12); }
-  .slot .n { font-family: var(--serif); font-style: italic; color: var(--accent); font-size: 1rem; font-variant-numeric: tabular-nums; }
-  .slot input { background: none; border: none; border-bottom: 1px solid transparent; font-family: var(--sans); font-size: .88rem; color: var(--ink); padding: .1rem 0; outline: none; }
-  .slot input:focus { border-bottom-color: var(--forest-40); }
+  .slotlist { border-top: 1px solid var(--forest-12); margin-top: 1.8rem; }
+  .slot { display: grid; grid-template-columns: 2.4rem 1fr 6.4rem 4rem auto; gap: .9rem; align-items: baseline; padding: .7rem 0; border-bottom: 1px solid var(--forest-12); }
+  .slot .n { font-family: var(--serif); font-size: 1rem; font-variant-numeric: tabular-nums; }
+  .slot .n.future { color: var(--forest-40); }
+  .slot .n.current { color: var(--accent); font-style: italic; }
+  .slot .n.done-ok { color: var(--forest); }
+  .slot .n.done-over { color: var(--accent); }
+  .slot input, .slot select { background: none; border: none; border-bottom: 1px solid transparent; font-family: var(--sans); font-size: .85rem; color: var(--ink); padding: .1rem 0; outline: none; }
+  .slot input:focus, .slot select:focus { border-bottom-color: var(--forest-40); }
   .slot input::placeholder { color: var(--forest-40); }
-  .slot input.mins { width: 3.2rem; text-align: end; font-variant-numeric: tabular-nums; color: var(--forest-70); }
-  .slot.done { opacity: .45; }
-  .slot.done .n { color: var(--forest-40); font-style: normal; }
+  .slot input.mins { width: 3rem; text-align: end; font-variant-numeric: tabular-nums; color: var(--forest-70); }
+  .slot select { color: var(--forest-70); font-size: .78rem; cursor: pointer; }
+  .slot.t-urgent input.lab { color: var(--accent); }
+  .slot.t-phone input.lab { color: var(--olive); }
+  .slot.t-break input.lab, .slot.t-admin input.lab { color: var(--forest-40); font-style: italic; }
+  .slot.done { opacity: .5; }
   .slot .tools { font-size: .72rem; color: var(--forest-40); white-space: nowrap; }
-  .slot .tools button { background: none; border: none; cursor: pointer; color: inherit; font-size: .9rem; padding: 0 .3rem; }
+  .slot .tools button { background: none; border: none; cursor: pointer; color: inherit; font-size: .85rem; padding: 0 .25rem; }
   .slot .tools button:hover { color: var(--forest); }
-  .slot .actual { font-size: .72rem; letter-spacing: .1em; color: var(--forest-40); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .slot .actual { font-size: .7rem; letter-spacing: .08em; color: var(--forest-40); font-variant-numeric: tabular-nums; white-space: nowrap; }
 
-  .tm-summary .lv-row .v { font-variant-numeric: tabular-nums; }
-
-  /* ---------- decision trees ---------- */
+  /* ---------- trees ---------- */
   .tree-q { font-family: var(--serif); font-weight: 400; font-size: clamp(1.5rem, 3vw, 2.1rem); line-height: 1.3; color: var(--forest-90); max-width: 26ch; }
-  .tree-opts { margin-top: 1.8rem; border-top: 1px solid var(--forest-12); }
-  .tree-opts button {
-    display: flex; justify-content: space-between; align-items: baseline; width: 100%;
-    background: none; border: none; cursor: pointer; text-align: start;
-    padding: 1rem 0; border-bottom: 1px solid var(--forest-12);
-    font-family: var(--serif); font-size: 1.2rem; color: var(--ink);
-    transition: transform .4s var(--ease), color .4s var(--ease);
-  }
+  .tree-opts { margin-top: 1.6rem; border-top: 1px solid var(--forest-12); }
+  .tree-opts button { display: flex; justify-content: space-between; align-items: baseline; width: 100%; background: none; border: none; cursor: pointer; text-align: start; padding: .95rem 0; border-bottom: 1px solid var(--forest-12); font-family: var(--serif); font-size: 1.18rem; color: var(--ink); transition: transform .4s var(--ease), color .4s var(--ease); }
   .tree-opts button:hover { transform: translateX(6px); color: var(--forest); }
   .tree-opts button .arr { color: var(--forest-40); }
-  .tree-crumb { font-size: .68rem; letter-spacing: .22em; text-transform: uppercase; color: var(--forest-40); margin-bottom: 1.4rem; }
+  .tree-crumb { font-size: .66rem; letter-spacing: .22em; text-transform: uppercase; color: var(--forest-40); margin-bottom: 1.3rem; }
   .tree-crumb button { background: none; border: none; cursor: pointer; color: inherit; font: inherit; letter-spacing: inherit; text-transform: inherit; border-bottom: 1px solid var(--forest-12); padding-bottom: .1rem; }
-  .tree-result { margin-top: 2rem; border-inline-start: 1px solid var(--forest-40); padding: .2rem 0 .2rem 1.4rem; }
+  .tree-result { margin-top: 1.8rem; border-inline-start: 1px solid var(--forest-40); padding: .2rem 0 .2rem 1.4rem; }
   .tree-result.escalate { border-inline-start-color: var(--accent); }
-  .tree-result h3 { font-family: var(--serif); font-weight: 500; font-size: 1.3rem; color: var(--forest-90); margin-bottom: .5rem; }
   .tree-result p { font-size: .9rem; line-height: 1.8; color: var(--forest-70); max-width: 58ch; }
   .tree-result .refs { margin-top: 1rem; }
   .tree-result .refs a { display: inline-block; margin-inline-end: 1.6rem; font-size: .8rem; }
+
+  /* ---------- desk tabs ---------- */
+  .tabpane[hidden] { display: none; }
+  .counter { display: flex; align-items: baseline; gap: 1.2rem; padding: .8rem 0; border-bottom: 1px solid var(--forest-12); }
+  .counter .cnum { font-family: var(--serif); font-size: 1.6rem; color: var(--forest-90); font-variant-numeric: tabular-nums; min-width: 2.4rem; }
+  .counter button { background: none; border: none; cursor: pointer; color: var(--forest-40); font-size: 1.05rem; padding: 0 .35rem; }
+  .counter button:hover { color: var(--forest); }
 
   /* login + admin */
   .linput { display: block; width: 100%; background: none; border: none; border-bottom: 1px solid var(--forest-12); padding: .7rem 0; font-family: var(--sans); font-size: .95rem; color: var(--ink); outline: none; }
@@ -250,24 +280,30 @@
   .catdot { display: inline-block; width: .5em; height: .5em; border-radius: 50%; margin-inline-end: .6em; }
 
   /* footer */
-  footer { margin-top: 4rem; border-top: 1px solid var(--forest-40); padding: 2.4rem 0 4rem; position: relative; z-index: 1; }
+  footer { margin-top: 3.5rem; border-top: 1px solid var(--forest-40); padding: 2.2rem 0 4rem; position: relative; z-index: 1; }
   footer .wrap { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 1rem; }
   footer .fine { font-size: .62rem; letter-spacing: .26em; text-transform: uppercase; color: var(--forest-40); }
   footer .fine a { color: inherit; }
   footer .src { font-size: .74rem; line-height: 1.7; color: var(--forest-70); max-width: 62ch; margin-top: 1.2rem; }
 
-  .r { opacity: 0; transform: translateY(20px); transition: opacity .9s var(--ease), transform .9s var(--ease); }
+  .r { opacity: 0; transform: translateY(18px); transition: opacity .8s var(--ease), transform .8s var(--ease); }
   .r.on { opacity: 1; transform: none; }
 
+  @media (max-width: 960px) {
+    .dash-grid { grid-template-columns: 1fr; }
+    .dcol + .dcol { border-inline-start: none; padding-inline-start: 0; border-top: 1px solid var(--forest-12); margin-top: 1.8rem; padding-top: 1.8rem; }
+  }
   @media (max-width: 760px) {
     .header-inner { flex-wrap: wrap; gap: .7rem; }
     .hdr-search { order: 3; max-width: 100%; flex-basis: 100%; margin-inline-start: 0; }
-    .r-row { grid-template-columns: 4.4rem 1fr; }
+    .r-row { grid-template-columns: 4rem 1fr; }
     .r-row .x { grid-column: 2; }
     .d-row { grid-template-columns: 1fr; gap: .25rem; }
     .d-row .arr { display: none; }
-    .slot { grid-template-columns: 2rem 1fr 4rem; }
-    .slot .tools { grid-column: 2 / 4; }
+    .slot { grid-template-columns: 2rem 1fr 3.4rem; }
+    .slot select, .slot .tools { grid-column: auto; }
+    .slot .actual { grid-column: 1 / -1; }
+    .lv-row .t { min-width: 0; }
   }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
@@ -275,7 +311,7 @@
     .r { opacity: 1; transform: none; }
   }
   @media print {
-    .site-header, .stream, .blk.atlas, footer, .tm-actions, .phasebar, .slot .tools, .filters { display: none !important; }
+    .site-header, .stream, footer, .tm-actions, .phasebar, .slot .tools, .filters, .chips, .qnav { display: none !important; }
     body { background: #fff; }
     body::before { display: none; }
   }
@@ -296,7 +332,7 @@
 <main>
   <!-- ==================== LOGIN ==================== -->
   <div class="view" id="view-login" hidden>
-    <section class="next" style="min-height:82vh; display:flex; flex-direction:column; justify-content:center">
+    <section class="dash" style="min-height:82vh; display:flex; flex-direction:column; justify-content:center">
       <div class="reading">
         <img src="crest.png" width="54" height="64" alt="Sahl family crest" style="display:block; margin-bottom:1.8rem">
         <h1 style="font-family:var(--serif);font-weight:400;font-size:clamp(2.2rem,5vw,3.4rem);letter-spacing:-.01em;line-height:1.1;color:var(--forest-90)">the trainee signs in.</h1>
@@ -310,125 +346,139 @@
     </section>
   </div>
 
-  <!-- ==================== HOME ==================== -->
-  <div class="view" id="view-home">
+  <!-- ==================== HOME (the dashboard) ==================== -->
+  <div class="view" id="view-home" hidden>
 
-    <section class="next">
-      <div class="reading">
-        <p class="kicker r"><em>01</em><span>next up</span></p>
-        <p class="when r" id="nextWhen">wednesday</p>
-        <h1 class="r" id="nextDate">…</h1>
-        <p class="topic r" id="nextTopic"></p>
-        <div class="meta r" id="nextMeta"></div>
-        <p class="count r" id="nextCount"></p>
+    <section class="dash">
+      <div class="container">
+        <div class="dash-grid">
+          <div class="dcol">
+            <p class="dhead"><em>01</em><span>next up</span></p>
+            <p class="next-when" id="nextWhen">wednesday</p>
+            <h1 class="next-date" id="nextDate">…</h1>
+            <p class="next-topic" id="nextTopic"></p>
+            <p class="next-count" id="nextCount"></p>
+            <div class="qnav">
+              <a href="#year">the year ↓</a>
+              <a href="#desk">the desk ↓</a>
+              <a href="#atlas">the atlas ↓</a>
+              <a href="#/clinic">the clinic →</a>
+            </div>
+            <p class="dhead" style="margin-top:2rem"><em>02</em><span>the radar</span></p>
+            <div class="rows" id="radar"></div>
+          </div>
+          <div class="dcol">
+            <p class="dhead"><em>03</em><span>the calendar</span></p>
+            <div class="moncal">
+              <div class="mh"><button id="monPrev" aria-label="Previous month">←</button><span class="mn" id="monName"></span><button id="monNext" aria-label="Next month">→</button></div>
+              <div class="mgrid" id="monGrid"></div>
+              <div class="legend"><span><span class="dot" style="background:var(--forest)"></span>teaching</span><span><span class="dot" style="background:var(--accent)"></span>flagged</span><span><span class="dot" style="border:1px solid var(--forest-40)"></span>break</span></div>
+              <div class="wk" id="wkDetail"></div>
+            </div>
+            <p class="dhead" style="margin-top:2rem"><em>04</em><span>the stream</span></p>
+            <div class="rows stream" id="streamRows"></div>
+          </div>
+          <div class="dcol">
+            <p class="dhead"><em>05</em><span>lost? start here</span></p>
+            <div class="dir" id="treeIndex"></div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section class="blk stream">
-      <div class="reading">
-        <p class="kicker r"><em>02</em><span>the stream</span></p>
-        <h2 class="blk-title r">what is new</h2>
-        <p class="lead-in r">Site changes and guideline watches, dated as they land.</p>
-        <div class="rows" id="streamRows"></div>
+    <section class="blk" id="year">
+      <div class="container">
+        <p class="kicker"><em>06</em><span>the year</span></p>
+        <h2 class="blk-title">every wednesday, 2026–27</h2>
+        <div class="chips" id="filters">
+          <button data-f="upcoming" class="on" aria-pressed="true">upcoming</button>
+          <button data-f="all" aria-pressed="false">all</button>
+          <button data-f="teaching" aria-pressed="false">teaching</button>
+          <button data-f="flagged" aria-pressed="false">flagged</button>
+          <button data-f="break" aria-pressed="false">breaks</button>
+        </div>
+        <div class="rows" id="yearRows"></div>
+      </div>
+    </section>
+
+    <section class="blk" id="atlas">
+      <div class="container">
+        <p class="kicker"><em>07</em><span>the atlas</span></p>
+        <h2 class="blk-title">the shelves</h2>
+        <div class="dir" id="atlasShelves"></div>
+      </div>
+    </section>
+
+    <section class="blk" id="desk">
+      <div class="container">
+        <p class="kicker"><em>08</em><span>the desk</span></p>
+        <h2 class="blk-title">the desk</h2>
+        <div class="chips" id="deskTabs">
+          <button data-t="renewals" class="on" aria-pressed="true">renewals</button>
+          <button data-t="contacts" aria-pressed="false">contacts</button>
+          <button data-t="counters" aria-pressed="false">counters</button>
+          <button data-t="audit" aria-pressed="false">audit</button>
+          <button data-t="money" aria-pressed="false">money</button>
+        </div>
+
+        <div class="tabpane" id="pane-renewals">
+          <div class="rows" id="renewals"></div>
+          <div class="tm-actions"><button class="tbtn" id="addRenewal">+ add a renewal</button></div>
+          <div id="renewalForm" hidden style="margin-top:1.2rem">
+            <div class="slot" style="grid-template-columns:1fr 9.5rem auto auto">
+              <input id="rnName" placeholder="what renews (IMC, indemnity, vetting, ATLS…)" aria-label="renewal name">
+              <input id="rnDate" type="date" aria-label="renewal date" style="color:var(--forest-70)">
+              <span class="tools"><button class="tbtn" id="rnSave">add</button></span>
+              <span class="tools"><button class="tbtn" id="rnCancel">cancel</button></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="tabpane" id="pane-contacts" hidden>
+          <div class="rows" id="contacts"></div>
+          <div class="tm-actions"><button class="tbtn" id="addContact">+ add a contact</button></div>
+          <div id="contactForm" hidden style="margin-top:1.2rem">
+            <div class="slot" style="grid-template-columns:1fr 1fr auto auto">
+              <input id="ctName" placeholder="who (scheme office, UL, PCRO…)" aria-label="contact name">
+              <input id="ctDetail" placeholder="email or phone" aria-label="contact detail">
+              <span class="tools"><button class="tbtn" id="ctSave">add</button></span>
+              <span class="tools"><button class="tbtn" id="ctCancel">cancel</button></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="tabpane" id="pane-counters" hidden>
+          <p class="lead-in">this rotation, counted. your trainer sets the target; you keep the tally.</p>
+          <div class="counter"><span class="cnum" id="cbdCount">0</span><span style="font-size:.88rem;color:var(--forest-70)">CBDs done</span><span style="margin-inline-start:auto"><button id="cbdMinus">−</button><button id="cbdPlus">+</button></span></div>
+          <div class="counter"><span class="cnum" id="mcexCount">0</span><span style="font-size:.88rem;color:var(--forest-70)">mini-CEX done</span><span style="margin-inline-start:auto"><button id="mcexMinus">−</button><button id="mcexPlus">+</button></span></div>
+        </div>
+
+        <div class="tabpane" id="pane-audit" hidden>
+          <p class="lead-in">the pipeline. one line each; edit in place.</p>
+          <div class="rows" id="auditRows"></div>
+        </div>
+
+        <div class="tabpane" id="pane-money" hidden>
+          <div class="dir">
+            <a class="d-row" href="https://www.pcrs.ie" target="_blank" rel="noopener"><span class="mono">PCRS</span><span class="dd">payments administration — pcrs.ie.</span><span class="arr">→</span></a>
+            <a class="d-row" href="https://www.hse.ie" target="_blank" rel="noopener"><span class="mono">HSE</span><span class="dd">payslips, leave, occupational health — hse.ie.</span><span class="arr">→</span></a>
+            <a class="d-row" href="https://www.revenue.ie" target="_blank" rel="noopener"><span class="mono">REV</span><span class="dd">revenue — tax and the P60.</span><span class="arr">→</span></a>
+            <div class="d-row" style="text-decoration:none"><span class="mono" style="font-size:1.05rem">study leave</span><span class="dd">the form and the rules come from the scheme office — it is in contacts.</span><span></span></div>
+          </div>
+        </div>
       </div>
     </section>
 
     <section class="blk">
-      <div class="reading">
-        <p class="kicker r"><em>03</em><span>the radar</span></p>
-        <h2 class="blk-title r">dates with weight</h2>
-        <div class="rows" id="radar"></div>
-      </div>
-    </section>
-
-    <section class="blk atlas">
-      <div class="reading">
-        <p class="kicker r"><em>04</em><span>the atlas</span></p>
-        <h2 class="blk-title r">lost? start here.</h2>
-        <p class="lead-in r">Orientation lives here; the material stays with its owners. Search above, walk a tree, or go straight to the shelf.</p>
+      <div class="container">
+        <p class="kicker"><em>09</em><span>the register</span></p>
+        <h2 class="blk-title">who is who</h2>
         <div class="dir">
-          <a class="d-row r" href="#/tree/derm">
-            <span class="mono">derm</span>
-            <span class="dd">the red-flag walk-through: five questions to settle, watch, or escalate. ends in the sources.</span>
-            <span class="arr">→</span>
-          </a>
-          <div class="d-row r" style="text-decoration:none">
-            <span class="mono" style="font-size:1.1rem">chest pain</span>
-            <span class="dd">the next tree. headache, the feverish child, back pain and dizziness follow.</span>
-            <span class="arr" style="color:var(--forest-40)">soon</span>
-          </div>
-        </div>
-        <div class="dir" id="atlasShelves" style="margin-top:2.2rem"></div>
-      </div>
-    </section>
-
-    <section class="blk">
-      <div class="reading">
-        <p class="kicker r"><em>05</em><span>the year</span></p>
-        <h2 class="blk-title r">every wednesday, 2026–27</h2>
-        <div class="chips r" id="filters">
-          <button data-f="all" class="on">all</button>
-          <button data-f="teaching">teaching</button>
-          <button data-f="flagged">flagged</button>
-          <button data-f="break">breaks</button>
-        </div>
-        <div class="rows" id="year"></div>
-      </div>
-    </section>
-
-    <section class="blk">
-      <div class="reading">
-        <p class="kicker r"><em>06</em><span>the afternoon rhythm</span></p>
-        <h2 class="blk-title r">pm day release</h2>
-        <div class="lv" id="rhythm"></div>
-        <div class="dir" id="leads" style="margin-top:2rem"></div>
-      </div>
-    </section>
-
-    <section class="blk">
-      <div class="reading">
-        <p class="kicker r"><em>07</em><span>the desk</span></p>
-        <h2 class="blk-title r">renewals and contacts</h2>
-        <p class="lead-in r">Yours to keep. Add the dates and addresses once; they live in this browser, countdowns included. Nothing leaves the device.</p>
-        <h3 class="blk-title" style="font-size:1.25rem; margin-top:1.6rem">renewals</h3>
-        <div class="rows" id="renewals"></div>
-        <div class="tm-actions">
-          <button class="tbtn" id="addRenewal">+ add a renewal</button>
-        </div>
-        <div id="renewalForm" hidden style="margin-top:1.2rem">
-          <div class="slot" style="grid-template-columns:1fr 9.5rem auto auto">
-            <input id="rnName" placeholder="what renews (IMC, indemnity, vetting, ATLS…)" aria-label="renewal name">
-            <input id="rnDate" type="date" aria-label="renewal date" style="color:var(--forest-70)">
-            <span class="tools"><button class="tbtn" id="rnSave">add</button></span>
-            <span class="tools"><button class="tbtn" id="rnCancel">cancel</button></span>
-          </div>
-        </div>
-        <h3 class="blk-title" style="font-size:1.25rem; margin-top:2.2rem">contacts</h3>
-        <div class="rows" id="contacts"></div>
-        <div class="tm-actions">
-          <button class="tbtn" id="addContact">+ add a contact</button>
-        </div>
-        <div id="contactForm" hidden style="margin-top:1.2rem">
-          <div class="slot" style="grid-template-columns:1fr 1fr auto auto">
-            <input id="ctName" placeholder="who (scheme office, UL, PCRO…)" aria-label="contact name">
-            <input id="ctDetail" placeholder="email or phone" aria-label="contact detail">
-            <span class="tools"><button class="tbtn" id="ctSave">add</button></span>
-            <span class="tools"><button class="tbtn" id="ctCancel">cancel</button></span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="blk">
-      <div class="reading">
-        <p class="kicker r"><em>08</em><span>the register</span></p>
-        <h2 class="blk-title r">who is who</h2>
-        <div class="dir">
-          <a class="d-row r" href="https://www.icgp.ie" target="_blank" rel="noopener"><span class="mono">ICGP</span><span class="dd">the college: ePortfolio, exams, CPD, the scheme itself.</span><span class="arr">→</span></a>
-          <a class="d-row r" href="https://www.medicalcouncil.ie" target="_blank" rel="noopener"><span class="mono">IMC</span><span class="dd">registration, certificates, the roll of doctors.</span><span class="arr">→</span></a>
-          <a class="d-row r" href="https://www.pcrs.ie" target="_blank" rel="noopener"><span class="mono">PCRS</span><span class="dd">medical card and GP payments administration.</span><span class="arr">→</span></a>
-          <a class="d-row r" href="https://www.imo.ie" target="_blank" rel="noopener"><span class="mono">IMO</span><span class="dd">the union: contracts, NCHD advocacy, disputes.</span><span class="arr">→</span></a>
-          <a class="d-row r" href="https://www.hse.ie" target="_blank" rel="noopener"><span class="mono">HSE</span><span class="dd">the employer: pay, leave, occupational health.</span><span class="arr">→</span></a>
+          <a class="d-row" href="https://www.icgp.ie" target="_blank" rel="noopener"><span class="mono">ICGP</span><span class="dd">the college: ePortfolio, exams, CPD, the scheme itself.</span><span class="arr">→</span></a>
+          <a class="d-row" href="https://www.medicalcouncil.ie" target="_blank" rel="noopener"><span class="mono">IMC</span><span class="dd">registration, certificates, the roll of doctors.</span><span class="arr">→</span></a>
+          <a class="d-row" href="https://www.pcrs.ie" target="_blank" rel="noopener"><span class="mono">PCRS</span><span class="dd">medical card and GP payments administration.</span><span class="arr">→</span></a>
+          <a class="d-row" href="https://www.imo.ie" target="_blank" rel="noopener"><span class="mono">IMO</span><span class="dd">the union: contracts, NCHD advocacy, disputes.</span><span class="arr">→</span></a>
+          <a class="d-row" href="https://www.hse.ie" target="_blank" rel="noopener"><span class="mono">HSE</span><span class="dd">the employer: pay, leave, occupational health.</span><span class="arr">→</span></a>
         </div>
       </div>
     </section>
@@ -442,16 +492,16 @@
 
         <div id="tmSetup">
           <h1 class="tm-big">set the day.</h1>
-          <p class="tm-sub">pick a template, or set the slot and the count.</p>
-          <div class="chips" id="tmTemplates" style="margin-top:1.8rem"></div>
+          <p class="tm-sub">pick a template, or set the slot and the count</p>
+          <div class="chips" id="tmTemplates" style="margin-top:1.6rem"></div>
           <div class="chips" id="tmMins">
-            <span style="font-size:.68rem; letter-spacing:.2em; text-transform:uppercase; color:var(--forest-40); align-self:center">slot:</span>
+            <span style="font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--forest-40);align-self:center">slot:</span>
             <button data-m="10">10 min</button>
             <button data-m="12" class="on">12 min</button>
             <button data-m="15">15 min</button>
           </div>
           <div class="chips" id="tmCount">
-            <span style="font-size:.68rem; letter-spacing:.2em; text-transform:uppercase; color:var(--forest-40); align-self:center">patients:</span>
+            <span style="font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--forest-40);align-self:center">patients:</span>
             <button data-c="10">10</button>
             <button data-c="12" class="on">12</button>
             <button data-c="14">14</button>
@@ -467,17 +517,21 @@
           <p class="tm-sub" id="tmPos">slot 1 of 12</p>
           <h1 class="tm-big" id="tmClock">00:00</h1>
           <p class="tm-sub" id="tmSlotLabel">patient 1</p>
-          <p class="tm-drift" id="tmDrift"></p>
+          <p class="tm-drift ontime" id="tmDrift"></p>
           <div class="phasebar" id="phaseBar">
             <button data-p="0" class="on" aria-pressed="true">history</button>
-            <button data-p="1">exam</button>
-            <button data-p="2">plan</button>
-            <button data-p="3">clerking</button>
+            <button data-p="1" aria-pressed="false">exam</button>
+            <button data-p="2" aria-pressed="false">plan</button>
+            <button data-p="3" aria-pressed="false">clerking</button>
           </div>
           <div class="tm-actions">
             <button class="tbtn primary" id="tmWrap">wrap up · next patient</button>
+            <button class="tbtn" id="tmDna">dna</button>
+            <button class="tbtn" id="tmDefer">defer →</button>
+            <button class="tbtn" id="tmPause">pause</button>
             <button class="tbtn" id="tmAdd5">+ 5 minutes</button>
-            <button class="tbtn" id="tmEdit">edit the day</button>
+            <button class="tbtn" id="tmBreak">+ break</button>
+            <label class="tm-check"><input type="checkbox" id="tmChime"> chime</label>
             <button class="tbtn" id="tmEnd">end the day</button>
           </div>
           <div class="slotlist" id="slotList"></div>
@@ -485,7 +539,7 @@
 
         <div id="tmSummary" hidden>
           <h1 class="tm-big">the day, told.</h1>
-          <div class="lv tm-summary" id="tmSumRows" style="margin-top:1.8rem"></div>
+          <div class="lv tm-summary" id="tmSumRows" style="margin-top:1.6rem"></div>
           <div class="tm-actions">
             <button class="tbtn primary" id="tmCopy">copy the summary</button>
             <button class="tbtn" id="tmNew">a new day</button>
@@ -514,13 +568,13 @@
           <span class="arr">→</span>
         </a>
 
-        <h2 class="blk-title" style="margin-top:2.6rem">the people</h2>
+        <h2 class="blk-title" style="margin-top:2.4rem">the people</h2>
         <div class="rows" id="userRows"></div>
 
-        <h2 class="blk-title" style="margin-top:2.6rem">the log</h2>
+        <h2 class="blk-title" style="margin-top:2.4rem">the log</h2>
         <div class="rows" id="logRows"></div>
 
-        <h2 class="blk-title" style="margin-top:2.6rem">post to the stream</h2>
+        <h2 class="blk-title" style="margin-top:2.4rem">post to the stream</h2>
         <div class="slot" style="grid-template-columns:1fr 1fr auto; border-top:1px solid var(--forest-12); padding-top:1rem">
           <input id="stTitle" placeholder="the line (one sentence)" aria-label="stream line">
           <input id="stLink" placeholder="link (optional)" aria-label="stream link">
@@ -646,7 +700,9 @@ const DAY = 86400000;
 const today = new Date(); today.setHours(0, 0, 0, 0);
 const MONTHS = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 const MON3 = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+const DOW3 = ["m","t","w","t","f","s","s"];
 const parse = s => new Date(s + "T00:00:00");
+const iso = d => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
 const fmtLong = d => `${d.getDate()} ${MONTHS[d.getMonth()]} ${d.getFullYear()}`;
 const fmtShort = d => `${d.getDate()} ${MON3[d.getMonth()]}`;
 const onsiteLabel = { yes: "onsite · UL", few: "mostly online", mixed: "reviews, then blended", no: "no release" };
@@ -656,11 +712,26 @@ const store = {
   set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} }
 };
 
+/* ================= auth (demo gate: admin / admin) ================= */
+const isAuthed = () => sessionStorage.getItem("gp-auth") === "1";
+let pendingHash = null;
+$("loginForm").addEventListener("submit", e => {
+  e.preventDefault();
+  if ($("lu").value.trim() === "admin" && $("lp").value === "admin") {
+    sessionStorage.setItem("gp-auth", "1");
+    location.hash = pendingHash || "#/";
+    pendingHash = null;
+    route();
+  } else {
+    $("loginErr").hidden = false;
+  }
+});
+
 /* ================= router ================= */
 const VIEWS = { "": "view-home", "#/": "view-home", "#/clinic": "view-clinic", "#/admin": "view-admin" };
-const isAuthed = () => sessionStorage.getItem("gp-auth") === "1";
 function route() {
   if (!isAuthed()) {
+    if (location.hash.startsWith("#/") && location.hash !== "#/") pendingHash = location.hash;
     document.documentElement.classList.add("gated");
     document.querySelectorAll(".view").forEach(v => { v.hidden = v.id !== "view-login"; });
     window.scrollTo(0, 0);
@@ -675,7 +746,7 @@ function route() {
   if (h.startsWith("#/tree/")) openTree(h.slice(7));
   if (h && !h.startsWith("#/")) {
     const el = document.getElementById(h.slice(1));
-    if (el) { setTimeout(() => el.scrollIntoView({ behavior: reduced ? "auto" : "smooth" }), 30); return; }
+    if (el) { setTimeout(() => el.scrollIntoView({ behavior: reduced ? "auto" : "smooth" }), 30); history.replaceState(null, "", "#/"); return; }
   }
   window.scrollTo(0, 0);
   if (target === "view-home") setTimeout(observeReveals, 30);
@@ -701,73 +772,17 @@ if (!reduced) {
 }
 
 /* ================= lamp ================= */
-const lampOn = store.get("gp-lamp", false);
-if (lampOn) document.documentElement.classList.add("lamp");
+if (store.get("gp-lamp", false)) {
+  document.documentElement.classList.add("lamp");
+  $("themeMeta").setAttribute("content", "#24221A");
+}
 $("lampBtn").addEventListener("click", () => {
   const on = document.documentElement.classList.toggle("lamp");
   store.set("gp-lamp", on);
-  document.querySelector('meta[name="theme-color"]').setAttribute("content", on ? "#24221A" : "#EFEBCE");
+  $("themeMeta").setAttribute("content", on ? "#24221A" : "#EFEBCE");
 });
 
-/* ================= auth (demo gate: admin / admin) ================= */
-$("loginForm").addEventListener("submit", e => {
-  e.preventDefault();
-  if ($("lu").value.trim() === "admin" && $("lp").value === "admin") {
-    sessionStorage.setItem("gp-auth", "1");
-    location.hash = "#/";
-    route();
-  } else {
-    $("loginErr").hidden = false;
-  }
-});
-
-/* ================= demo data (defaults until the owner edits) ================= */
-const DEFAULT_RENEWALS = [
-  { name: "BLS renewal", date: "2026-09-28" },
-  { name: "Garda vetting", date: "2026-10-12" },
-  { name: "IMC registration", date: "2026-11-30" },
-  { name: "ACLS", date: "2026-12-01" },
-  { name: "indemnity", date: "2027-01-31" },
-  { name: "ATLS", date: "2027-03-20" }
-];
-const getRenewals = () => [].concat(store.get("gp-renewals", null) ?? DEFAULT_RENEWALS);
-
-const DEFAULT_CONTACTS = [
-  { name: "scheme office", detail: "scheme.office@example.ie · 061 000 000" },
-  { name: "programme director", detail: "director@example.ie" },
-  { name: "UL postgrad centre", detail: "061 000 001" },
-  { name: "PCRO", detail: "pcro@example.ie" }
-];
-const getContacts = () => [].concat(store.get("gp-contacts", null) ?? DEFAULT_CONTACTS);
-
-const LOG_CATS = { teaching: "var(--forest)", clinic: "var(--accent)", assessment: "#7A6A2F", admin: "var(--forest-40)" };
-const DEFAULT_LOG = [
-  { d: "2026-07-15", t: "day release · curriculum planning", c: "teaching" },
-  { d: "2026-07-16", t: "clinic · 11 patients · on time", c: "clinic" },
-  { d: "2026-07-22", t: "day release · uncertainty of cases", c: "teaching" },
-  { d: "2026-07-23", t: "cbd · chronic disease review", c: "assessment" },
-  { d: "2026-07-29", t: "day release · audit and research", c: "teaching" },
-  { d: "2026-07-30", t: "clinic · 13 patients · 6 min over", c: "clinic" },
-  { d: "2026-08-05", t: "audit · data collection finished", c: "admin" },
-  { d: "2026-08-06", t: "clinic · 12 patients · on time", c: "clinic" },
-  { d: "2026-08-12", t: "mini-cex · paediatric fever", c: "assessment" },
-  { d: "2026-08-13", t: "study leave form sent", c: "admin" },
-  { d: "2026-08-19", t: "reading · deprescribing", c: "teaching" },
-  { d: "2026-08-20", t: "clinic · 10 patients · 2 min ahead", c: "clinic" },
-  { d: "2026-08-21", t: "cbd · diabetes annual review", c: "assessment" }
-];
-const getLog = () => [].concat(store.get("gp-log", null) ?? DEFAULT_LOG);
-
-const DEMO_USERS = [
-  { name: "Dr Sahl Musa", meta: "year 3 · mid-west", role: "owner" },
-  { name: "Dr Aisha Rahman", meta: "year 3 · mid-west", role: "trainee" },
-  { name: "Dr Priya Nair", meta: "year 4 · mid-west", role: "trainee" },
-  { name: "Dr Conor Lynch", meta: "year 2 · mid-west", role: "trainee" },
-  { name: "Dr Elena Petrova", meta: "year 3 · mid-west", role: "trainee" },
-  { name: "Dr Tomás Ó Briain", meta: "year 1 · mid-west", role: "trainee" }
-];
-
-/* ================= calendar: next up / radar / year ================= */
+/* ================= calendar: next up / radar ================= */
 const futureWeeks = CAL.weeks.filter(w => parse(w.date) >= today);
 const nextW = futureWeeks[0];
 if (nextW) {
@@ -777,9 +792,7 @@ if (nextW) {
   $("nextDate").textContent = fmtLong(d);
   if (nextW.release) {
     $("nextTopic").textContent = nextW.topic ? nextW.topic + (nextW.lead ? ` · ${nextW.lead}` : "") : "day release";
-    $("nextMeta").innerHTML = `<span class="m">onsite · ${onsiteLabel[nextW.onsite] || ""}</span>` + (nextW.note ? ` <span class="m">· ${nextW.note}</span>` : "");
-    $("nextMeta").style.cssText = "margin-top:1.4rem;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--forest-40)";
-    $("nextCount").textContent = "teaching wednesday";
+    $("nextCount").textContent = "teaching wednesday" + (nextW.note ? " · " + nextW.note : "");
   } else {
     $("nextTopic").textContent = nextW.note ? `no day release · ${nextW.note.toLowerCase()}` : "no day release";
     const nt = futureWeeks.find(w => w.release);
@@ -789,6 +802,7 @@ if (nextW) {
 
 $("radar").innerHTML = CAL.weeks
   .filter(w => CAL.radarFlags.includes(w.flag) && parse(w.date) >= today)
+  .slice(0, 6)
   .map(w => {
     const d = parse(w.date);
     const n = Math.round((d - today) / DAY);
@@ -797,9 +811,62 @@ $("radar").innerHTML = CAL.weeks
     return `<div class="r-row"><span class="d">${fmtShort(d)}</span><span class="w"><b>${what}${extra}</b></span><span class="x">${n === 0 ? "today" : n === 1 ? "tomorrow" : "in " + n + " days"}</span></div>`;
   }).join("") || `<div class="r-row"><span class="w">nothing flagged ahead; the year is done.</span></div>`;
 
+/* ================= the month calendar ================= */
+let calCursor = new Date(today.getFullYear(), today.getMonth(), 1);
+const weekByDate = {};
+CAL.weeks.forEach(w => { weekByDate[w.date] = w; });
+let selectedDate = (nextW && nextW.date) || null;
+
+function renderMonth() {
+  const y = calCursor.getFullYear(), m = calCursor.getMonth();
+  $("monName").textContent = `${MONTHS[m]} ${y}`;
+  const first = new Date(y, m, 1);
+  const lead = (first.getDay() + 6) % 7;
+  const days = new Date(y, m + 1, 0).getDate();
+  let html = DOW3.map(d => `<div class="dh">${d}</div>`).join("");
+  for (let i = 0; i < lead; i++) html += `<div class="mcell dim"></div>`;
+  for (let d = 1; d <= days; d++) {
+    const date = new Date(y, m, d);
+    const key = iso(date);
+    const wk = weekByDate[key];
+    const isToday = date.getTime() === today.getTime();
+    let dot = "";
+    if (wk) dot = `<span class="dot ${wk.release ? (CAL.radarFlags.includes(wk.flag) ? "f" : "t") : "b"}"></span>`;
+    html += `<div class="mcell${isToday ? " today" : ""}${wk ? " wed" : ""}${key === selectedDate ? " sel" : ""}" ${wk ? `data-date="${key}"` : ""}>${d}${dot}</div>`;
+  }
+  $("monGrid").innerHTML = html;
+  renderWeekDetail();
+}
+function renderWeekDetail() {
+  const wk = selectedDate && weekByDate[selectedDate];
+  if (!wk) { $("wkDetail").innerHTML = ""; return; }
+  const d = parse(wk.date);
+  const n = Math.round((d - today) / DAY);
+  const when = n < 0 ? "past" : n === 0 ? "today" : n === 1 ? "tomorrow" : `in ${n} days`;
+  const main = wk.release
+    ? `<b>${wk.topic || "day release"}</b>${wk.lead ? " · " + wk.lead : ""}`
+    : `<b>no release</b>${wk.note ? " · " + wk.note : ""}`;
+  $("wkDetail").innerHTML = `${main}<br><span style="font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--forest-40)">wed ${fmtShort(d)} · ${when} · ${wk.release ? (onsiteLabel[wk.onsite] || "") : ""}${wk.note && wk.release ? " · " + wk.note : ""}</span>`;
+}
+function syncCalSelection() {
+  if (!selectedDate) return;
+  const d = parse(selectedDate);
+  if (d.getFullYear() !== calCursor.getFullYear() || d.getMonth() !== calCursor.getMonth()) selectedDate = null;
+}
+$("monPrev").addEventListener("click", () => { calCursor = new Date(calCursor.getFullYear(), calCursor.getMonth() - 1, 1); syncCalSelection(); renderMonth(); });
+$("monNext").addEventListener("click", () => { calCursor = new Date(calCursor.getFullYear(), calCursor.getMonth() + 1, 1); syncCalSelection(); renderMonth(); });
+$("monGrid").addEventListener("click", e => {
+  const c = e.target.closest(".mcell.wed"); if (!c) return;
+  selectedDate = c.dataset.date;
+  renderMonth();
+});
+renderMonth();
+
+/* ================= the year register ================= */
 function renderYear(filter) {
-  $("year").innerHTML = CAL.weeks
+  $("yearRows").innerHTML = CAL.weeks
     .filter(w => {
+      if (filter === "upcoming") return parse(w.date) >= today;
       if (filter === "all") return true;
       if (filter === "break") return w.flag === "break";
       if (filter === "flagged") return CAL.radarFlags.includes(w.flag);
@@ -811,18 +878,18 @@ function renderYear(filter) {
       const what = w.release
         ? (w.topic ? `<b>${w.topic}</b>` + (w.lead ? ` · ${w.lead}` : "") : "<b>day release</b>")
         : `<b>no release</b>` + (w.note ? ` · ${w.note}` : "");
-      const read = w.topic ? `<a class="readlink" href="#" role="button" data-q="${w.topic}">read</a>` : "";
+      const read = w.topic ? `<a class="readlink" href="#" role="button" data-q="${esc(w.topic)}">read</a>` : "";
       const note = w.release && w.note ? ` <span style="color:var(--forest-40)">${w.note}</span>` : "";
       return `<div class="r-row${cls}"><span class="d">${fmtShort(d)}</span><span class="w">${what}${note}${read}</span><span class="x">${w.release ? (onsiteLabel[w.onsite] || "") : (w.flag === "break" ? "break" : "")}</span></div>`;
     }).join("");
 }
-renderYear("all");
+renderYear("upcoming");
 $("filters").addEventListener("click", e => {
   const b = e.target.closest("button"); if (!b) return;
   document.querySelectorAll("#filters button").forEach(x => { const on = x === b; x.classList.toggle("on", on); x.setAttribute("aria-pressed", on ? "true" : "false"); });
   renderYear(b.dataset.f);
 });
-$("year").addEventListener("click", e => {
+$("yearRows").addEventListener("click", e => {
   const a = e.target.closest("a.readlink"); if (!a) return;
   e.preventDefault();
   $("searchBox").value = a.dataset.q;
@@ -832,11 +899,11 @@ $("year").addEventListener("click", e => {
 /* ================= the stream ================= */
 const STREAM_SEED = [
   { d: "2026-08-23", t: "gp.sahl.ie opens: the calendar, the timer, the atlas", u: "#/" },
-  { d: "2026-08-23", t: "the derm red-flag walk-through added to the atlas", u: "#/tree/derm" },
-  { d: "2026-08-23", t: "the year register: 55 Wednesdays, parsed from the scheme PDF", u: "#year" }
+  { d: "2026-08-23", t: "six walk-throughs in the atlas: derm, chest pain, headache, feverish child, back pain, dizziness", u: "#/tree/derm" },
+  { d: "2026-08-23", t: "the clinic timer: phases, drift, dna, defer, breaks", u: "#/clinic" }
 ];
 function renderStream() {
-  const items = STREAM_SEED.concat([].concat(store.get("gp-stream-extra", []))).sort((a, b) => b.d.localeCompare(a.d));
+  const items = STREAM_SEED.concat([].concat(store.get("gp-stream-extra", []))).sort((a, b) => b.d.localeCompare(a.d)).slice(0, 5);
   const lastSeen = store.get("gp-seen", null);
   $("streamRows").innerHTML = items.map(s => {
     const isNew = lastSeen && s.d > lastSeen;
@@ -858,16 +925,32 @@ const SHELVES = [
   { mono: "ABX", dd: "HSE antimicrobial prescribing at antibioticprescribing.ie.", u: "https://antibioticprescribing.ie/" },
   { mono: "emed.ie", dd: "Irish emergency medicine reference.", u: "https://emed.ie/" },
   { mono: "BNF", dd: "doses, interactions, cautions.", u: "https://bnf.nice.org.uk/" },
+  { mono: "UKTIS", dd: "medicines in pregnancy, answered properly.", u: "https://www.medicinesinpregnancy.org/" },
   { grp: "the picture books" },
   { mono: "DermNet", dd: "every rash, photographed and described.", u: "https://dermnetnz.org/" },
   { mono: "ECG", dd: "ecglibrary.com and the LITFL ECG library.", u: "https://ecglibrary.com/" },
   { mono: "Rads", dd: "Radiopaedia and the Radiology Assistant.", u: "https://radiopaedia.org/" },
   { mono: "LITFL", dd: "emergency and critical care reference.", u: "https://litfl.com/" },
-  { mono: "GPN", dd: "GPnotebook for fast differentials.", u: "https://gpnotebook.com/" }
+  { mono: "GPN", dd: "GPnotebook for fast differentials.", u: "https://gpnotebook.com/" },
+  { mono: "psych", dd: "choice and medication, in plain language.", u: "https://www.choiceandmedication.org/" },
+  { mono: "travel", dd: "travel health pro — the " + "“going to Thailand” consult.", u: "https://travelhealthpro.org.uk/" }
 ];
 $("atlasShelves").innerHTML = SHELVES.map(s => s.grp
-  ? `<div class="d-row" style="text-decoration:none"><span class="mono" style="font-family:var(--sans);font-size:.62rem;letter-spacing:.26em;text-transform:uppercase;color:var(--forest-40)">${s.grp}</span><span></span><span></span></div>`
+  ? `<div class="d-row" style="text-decoration:none"><span class="mono" style="font-family:var(--sans);font-size:.6rem;letter-spacing:.26em;text-transform:uppercase;color:var(--forest-40)">${s.grp}</span><span></span><span></span></div>`
   : `<a class="d-row" href="${s.u}" target="_blank" rel="noopener"><span class="mono">${s.mono}</span><span class="dd">${s.dd}</span><span class="arr">→</span></a>`
+).join("");
+
+/* ================= tree index ================= */
+const TREE_LIST = [
+  { id: "derm", mono: "derm", dd: "the red-flag walk-through: five questions to settle, watch, or escalate." },
+  { id: "chest", mono: "chest", dd: "chest pain: acs, pe, or the wall between you and worry." },
+  { id: "head", mono: "head", dd: "headache: thunderclap, meningitis, gca, or tension." },
+  { id: "fever", mono: "fever", dd: "the feverish child: the traffic-light questions." },
+  { id: "back", mono: "back", dd: "back pain: cauda equina first, then the calm path." },
+  { id: "dizzy", mono: "dizzy", dd: "dizziness: bppv, postural, cardiac, or the back of the brain." }
+];
+$("treeIndex").innerHTML = TREE_LIST.map(t =>
+  `<a class="d-row" href="#/tree/${t.id}"><span class="mono">${t.mono}</span><span class="dd">${t.dd}</span><span class="arr">→</span></a>`
 ).join("");
 
 /* ================= search dispatcher ================= */
@@ -882,37 +965,58 @@ const SEARCH_TARGETS = [
 function runSearch() {
   const q = $("searchBox").value.trim();
   if (!q) return;
+  const ql = q.toLowerCase();
   const enc = encodeURIComponent(q);
-  const calHits = CAL.weeks.filter(w => (w.topic + " " + w.note).toLowerCase().includes(q.toLowerCase())).slice(0, 3);
-  const contactHits = store.get("gp-contacts", []).filter(c => (c.name + " " + c.detail).toLowerCase().includes(q.toLowerCase())).slice(0, 2);
+  const calHits = CAL.weeks.filter(w => (w.topic + " " + w.note).toLowerCase().includes(ql)).slice(0, 3);
+  const contactHits = getContacts().filter(c => (c.name + " " + c.detail).toLowerCase().includes(ql)).slice(0, 2);
   let rows = "";
-  if (/derm|rash|skin|mole|blanch|blister/.test(q.toLowerCase()))
-    rows += `<div class="d-row" style="text-decoration:none;cursor:pointer" onclick="location.hash='#/tree/derm'"><span class="mono">tree</span><span class="dd"><b>the derm red-flag walk-through</b>: five questions, then the sources.</span><span class="arr">→</span></div>`;
-  calHits.forEach(w => rows += `<div class="d-row" style="text-decoration:none"><span class="mono" style="font-size:1.05rem">${fmtShort(parse(w.date))}</span><span class="dd">in the year: <b>${w.topic || w.note}</b></span><span></span></div>`);
+  const treeHit = TREE_LIST.find(t => ql.includes(t.mono) || t.dd.includes(ql) || (t.id === "derm" && /rash|skin|mole|blanch|blister/.test(ql)) || (t.id === "chest" && /chest|cardiac|angina/.test(ql)) || (t.id === "head" && /headache|migraine/.test(ql)) || (t.id === "fever" && /fever|child|baby|infant/.test(ql)) || (t.id === "back" && /back|spine|sciatica/.test(ql)) || (t.id === "dizzy" && /dizz|vertigo|lighthead/.test(ql)));
+  if (treeHit)
+    rows += `<div class="d-row" style="text-decoration:none;cursor:pointer" onclick="location.hash='#/tree/${treeHit.id}'"><span class="mono">tree</span><span class="dd"><b>the ${treeHit.mono} walk-through</b>: a few questions, then the sources.</span><span class="arr">→</span></div>`;
+  calHits.forEach(w => rows += `<div class="d-row" style="text-decoration:none"><span class="mono" style="font-size:1.05rem">${fmtShort(parse(w.date))}</span><span class="dd">in the year: <b>${esc(w.topic || w.note)}</b></span><span></span></div>`);
   contactHits.forEach(c => rows += `<div class="d-row" style="text-decoration:none"><span class="mono" style="font-size:1.05rem">${esc(c.name)}</span><span class="dd">${esc(c.detail)}</span><span></span></div>`);
   rows += SEARCH_TARGETS.map(t => `<a class="d-row" href="${t.url(enc)}" target="_blank" rel="noopener"><span class="mono" style="font-size:1.05rem">${t.name}</span><span class="dd">search ${t.name} for “${esc(q)}”</span><span class="arr">→</span></a>`).join("");
   let wrap = $("searchWrap");
   if (!wrap) {
     wrap = document.createElement("section");
-    wrap.className = "blk atlas";
+    wrap.className = "blk";
     wrap.id = "searchWrap";
+    wrap.innerHTML = `<div class="container"><p class="kicker"><em>⌕</em><span>search</span></p><div id="searchOut"></div></div>`;
     $("view-home").insertBefore(wrap, $("view-home").children[1]);
   }
   wrap.hidden = false;
-  wrap.innerHTML = `<div class="reading"><p class="kicker"><em>⌕</em><span>search</span></p><p class="sq">“${esc(q)}”</p><div class="dir">${rows}</div></div>`;
-  location.hash = "#/";
+  $("searchOut").innerHTML = `<p class="sq">“${esc(q)}”</p><div class="dir">${rows}</div>`;
+  if (location.hash && location.hash !== "#/") location.hash = "#/";
   setTimeout(() => wrap.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "start" }), 30);
 }
 $("searchBox").addEventListener("keydown", e => { if (e.key === "Enter") runSearch(); });
+</script>
 
-/* ================= renewals + contacts (local, editable) ================= */
-function daysUntil(iso) { const d = parse(iso); return Math.round((d - today) / DAY); }
+<script>
+/* ================= desk: defaults + editors ================= */
+const DEFAULT_RENEWALS = [
+  { name: "BLS renewal", date: "2026-09-28" },
+  { name: "Garda vetting", date: "2026-10-12" },
+  { name: "IMC registration", date: "2026-11-30" },
+  { name: "ACLS", date: "2026-12-01" },
+  { name: "indemnity", date: "2027-01-31" },
+  { name: "ATLS", date: "2027-03-20" }
+];
+const DEFAULT_CONTACTS = [
+  { name: "scheme office", detail: "scheme.office@example.ie · 061 000 000" },
+  { name: "programme director", detail: "director@example.ie" },
+  { name: "UL postgrad centre", detail: "061 000 001" },
+  { name: "PCRO", detail: "pcro@example.ie" }
+];
+function getRenewals() { return [].concat(store.get("gp-renewals", null) ?? DEFAULT_RENEWALS); }
+function getContacts() { return [].concat(store.get("gp-contacts", null) ?? DEFAULT_CONTACTS); }
+
+const daysUntil = isoStr => Math.round((parse(isoStr) - today) / DAY);
 let renewalsView = [];
 function renderRenewals() {
   renewalsView = getRenewals().slice().sort((a, b) => (a.date || "9999").localeCompare(b.date || "9999"));
-  const list = renewalsView;
-  $("renewals").innerHTML = list.length ? list.map((r, i) => {
-    const n = daysUntil(r.date);
+  $("renewals").innerHTML = renewalsView.length ? renewalsView.map((r, i) => {
+    const n = r.date ? daysUntil(r.date) : NaN;
     const label = isNaN(n) ? "no date" : n < 0 ? "expired" : n === 0 ? "today" : "in " + n + " days";
     return `<div class="r-row"><span class="d">${esc(r.date) || "—"}</span><span class="w"><b>${esc(r.name)}</b></span><span class="x">${label} · <a href="#" data-i="${i}" class="del-renewal" style="color:inherit">remove</a></span></div>`;
   }).join("") : `<div class="r-row"><span class="w">add IMC registration, indemnity, Garda vetting, ATLS/ACLS; the dates that ambush trainees.</span></div>`;
@@ -935,14 +1039,12 @@ $("renewals").addEventListener("click", e => {
   store.set("gp-renewals", renewalsView);
   renderRenewals();
 });
-renderRenewals();
 
 let contactsView = [];
 function renderContacts() {
   contactsView = getContacts().slice();
-  const list = contactsView;
-  $("contacts").innerHTML = list.length ? list.map((c, i) =>
-    `<div class="r-row"><span class="d" style="white-space:normal">${esc(c.name)}</span><span class="w">${esc(c.detail)}</span><span class="x"><a href="#" data-i="${i}" class="del-contact" style="color:inherit">remove</a></span></div>`
+  $("contacts").innerHTML = contactsView.length ? contactsView.map((c, i) =>
+    `<div class="r-row" style="grid-template-columns:minmax(9rem,13rem) 1fr auto"><span class="d" style="white-space:normal">${esc(c.name)}</span><span class="w">${esc(c.detail)}</span><span class="x"><a href="#" data-i="${i}" class="del-contact" style="color:inherit">remove</a></span></div>`
   ).join("") : `<div class="r-row"><span class="w">scheme office, UL, PCRO. add once; they stay in this browser.</span></div>`;
 }
 $("addContact").addEventListener("click", () => { $("contactForm").hidden = false; $("ctName").focus(); });
@@ -963,15 +1065,57 @@ $("contacts").addEventListener("click", e => {
   store.set("gp-contacts", contactsView);
   renderContacts();
 });
+renderRenewals();
 renderContacts();
 
-/* ================= rhythm + leads ================= */
-$("rhythm").innerHTML = CAL.pmRhythm.map(r => `<div class="lv-row"><span class="t">${r.time || ""}</span><span class="v">${r.what}</span></div>`).join("");
-$("leads").innerHTML = CAL.leads.map(l => `<div class="d-row" style="text-decoration:none"><span class="mono" style="font-size:1.1rem">${l.who}</span><span class="dd">${l.what}</span><span></span></div>`).join("");
-</script>
+/* desk tabs */
+$("deskTabs").addEventListener("click", e => {
+  const b = e.target.closest("button"); if (!b) return;
+  document.querySelectorAll("#deskTabs button").forEach(x => { const on = x === b; x.classList.toggle("on", on); x.setAttribute("aria-pressed", on ? "true" : "false"); });
+  ["renewals", "contacts", "counters", "audit", "money"].forEach(t => { $("pane-" + t).hidden = t !== b.dataset.t; });
+});
 
-<script>
+/* counters */
+function getCounters() { return Object.assign({ cbd: 0, mcex: 0 }, store.get("gp-counters", {})); }
+function renderCounters() {
+  const c = getCounters();
+  $("cbdCount").textContent = c.cbd;
+  $("mcexCount").textContent = c.mcex;
+}
+[["cbdPlus", "cbd", 1], ["cbdMinus", "cbd", -1], ["mcexPlus", "mcex", 1], ["mcexMinus", "mcex", -1]].forEach(([id, key, d]) => {
+  $(id).addEventListener("click", () => {
+    const c = getCounters();
+    c[key] = Math.max(0, c[key] + d);
+    store.set("gp-counters", c);
+    renderCounters();
+  });
+});
+renderCounters();
+
+/* audit pipeline */
+const AUDIT_STAGES = ["idea", "data", "analysis", "presentation"];
+function getAudit() {
+  const stored = store.get("gp-audit", {});
+  const out = Object.fromEntries(AUDIT_STAGES.map(s => [s, ""]));
+  AUDIT_STAGES.forEach(s => { if (typeof stored[s] === "string") out[s] = stored[s]; });
+  return out;
+}
+function renderAudit() {
+  const a = getAudit();
+  $("auditRows").innerHTML = AUDIT_STAGES.map(st =>
+    `<div class="r-row" style="grid-template-columns:7rem 1fr"><span class="d">${st}</span><span class="w"><input data-stage="${st}" value="${esc(a[st] || "")}" placeholder="…" style="width:100%;background:none;border:none;border-bottom:1px solid transparent;font-family:var(--sans);font-size:.88rem;color:var(--ink);padding:.1rem 0;outline:none"></span></div>`
+  ).join("");
+}
+$("auditRows").addEventListener("input", e => {
+  const inp = e.target.closest("input[data-stage]"); if (!inp) return;
+  const a = getAudit();
+  a[inp.dataset.stage] = inp.value;
+  store.set("gp-audit", a);
+});
+renderAudit();
+
 /* ================= the clinic timer ================= */
+const SLOT_TYPES = ["patient", "urgent", "phone", "break", "admin"];
 let day = store.get("gp-day", null);
 if (day && (!Array.isArray(day.slots) || typeof day.cur !== "number")) day = null;
 let tickTimer = null;
@@ -998,17 +1142,16 @@ $("tmTemplates").addEventListener("click", e => {
 $("tmMins").addEventListener("click", e => {
   const b = e.target.closest("button"); if (!b) return;
   sel.mins = +b.dataset.m;
-  document.querySelectorAll("#tmMins button").forEach(x => x.classList.toggle("on", x === b));
+  document.querySelectorAll("#tmMins button").forEach(x => { const on = x === b; x.classList.toggle("on", on); x.setAttribute("aria-pressed", on ? "true" : "false"); });
 });
 $("tmCount").addEventListener("click", e => {
   const b = e.target.closest("button"); if (!b) return;
   sel.count = +b.dataset.c;
-  document.querySelectorAll("#tmCount button").forEach(x => x.classList.toggle("on", x === b));
+  document.querySelectorAll("#tmCount button").forEach(x => { const on = x === b; x.classList.toggle("on", on); x.setAttribute("aria-pressed", on ? "true" : "false"); });
 });
 
 const mmss = s => `${String(Math.floor(s / 60)).padStart(2, "0")}:${String(Math.floor(s % 60)).padStart(2, "0")}`;
-
-function saveDay() { store.set("gp-day", day); }
+const saveDay = () => store.set("gp-day", day);
 
 function showTmPane(name) {
   $("tmSetup").hidden = name !== "setup";
@@ -1019,45 +1162,69 @@ function showTmPane(name) {
 $("tmStart").addEventListener("click", () => {
   day = {
     slots: Array.from({ length: sel.count }, (_, i) => ({
-      id: i, label: "patient " + (i + 1), mins: sel.mins,
-      elapsed: 0, phase: 0, phaseTimes: [0, 0, 0, 0], done: false, actual: 0
+      id: i, label: "patient " + (i + 1), mins: sel.mins, type: "patient",
+      elapsed: 0, phase: 0, phaseTimes: [0, 0, 0, 0], done: false, actual: 0, dna: false
     })),
-    cur: 0, startedDay: new Date().toISOString(), ended: false
+    cur: 0, startedDay: new Date().toISOString(), ended: false, paused: false, chime: $("tmChime").checked
   };
   saveDay();
   startRun();
 });
-
 $("tmRestore").addEventListener("click", startRun);
+
+let audioCtx = null;
+function chime() {
+  if (!day || !day.chime) return;
+  try {
+    audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+    const o = audioCtx.createOscillator();
+    const g = audioCtx.createGain();
+    o.frequency.value = 660;
+    g.gain.setValueAtTime(0.0001, audioCtx.currentTime);
+    g.gain.exponentialRampToValueAtTime(0.12, audioCtx.currentTime + 0.05);
+    g.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.7);
+    o.connect(g); g.connect(audioCtx.destination);
+    o.start(); o.stop(audioCtx.currentTime + 0.75);
+  } catch {}
+}
+$("tmChime").addEventListener("change", e => { if (day) { day.chime = e.target.checked; saveDay(); } });
 
 function startRun() {
   showTmPane("run");
   day.lastTick = Date.now();
+  $("tmChime").checked = !!day.chime;
+  $("tmPause").textContent = day.paused ? "resume" : "pause";
   renderSlots();
   tick(false);
   clearInterval(tickTimer);
   tickTimer = setInterval(() => tick(true), 1000);
 }
 
+let wrapChimed = false;
 function tick(increment) {
   if (!day || day.ended) return;
   const s = day.slots[day.cur];
   if (!s) return;
-  if (increment) {
+  if (increment && !day.paused) {
     const now = Date.now();
     s.elapsed += (now - (day.lastTick || now)) / 1000;
     day.lastTick = now;
   }
   const planned = s.mins * 60;
   $("tmClock").textContent = mmss(s.elapsed);
-  $("tmPos").textContent = `slot ${day.cur + 1} of ${day.slots.length} · ${mmss(planned)} planned`;
-  $("tmSlotLabel").textContent = s.label;
+  $("tmPos").textContent = `slot ${day.cur + 1} of ${day.slots.length} · ${mmss(planned)} planned${day.paused ? " · paused" : ""}`;
+  $("tmSlotLabel").textContent = s.label + (s.type !== "patient" ? " · " + s.type : "");
   document.querySelectorAll("#phaseBar button").forEach((b, i) => { b.classList.toggle("on", i === s.phase); b.setAttribute("aria-pressed", i === s.phase ? "true" : "false"); });
-  const drift = day.slots.filter(x => x.done).reduce((a, x) => a + (x.actual - x.mins * 60), 0);
+  const drift = day.slots.filter(x => x.done && !x.dna).reduce((a, x) => a + (x.actual - x.mins * 60), 0);
   const driftMin = Math.round(drift / 60);
+  $("tmDrift").className = "tm-drift " + (drift === 0 ? "ontime" : drift > 0 ? "over" : "ahead");
   $("tmDrift").textContent = drift === 0 ? "on time" : drift > 0 ? `${driftMin} min behind` : `${Math.abs(driftMin)} min ahead`;
-  $("tmWrap").classList.toggle("pulse", s.elapsed >= planned * .8 && s.phase < 2);
-  if (s.elapsed % 30 === 0) saveDay();
+  const shouldPulse = s.elapsed >= planned * .8 && s.phase < 2 && !day.paused;
+  $("tmWrap").classList.toggle("pulse", shouldPulse);
+  if (shouldPulse && !wrapChimed) { chime(); wrapChimed = true; }
+  if (!shouldPulse) wrapChimed = false;
+  const es = Math.floor(s.elapsed);
+  if (increment && es % 30 === 0 && es !== (day.lastSavedAt ?? -1)) { day.lastSavedAt = es; saveDay(); }
 }
 
 $("phaseBar").addEventListener("click", e => {
@@ -1077,11 +1244,43 @@ function nextPatient() {
   s.actual = s.elapsed;
   s.done = true;
   day.cur += 1;
+  wrapChimed = false;
   if (day.cur >= day.slots.length) { endDay(); return; }
   saveDay();
   renderSlots();
   tick(false);
 }
+
+$("tmDna").addEventListener("click", () => {
+  if (!day) return;
+  const s = day.slots[day.cur];
+  if (!s) return;
+  s.dna = true;
+  s.actual = 0;
+  s.done = true;
+  if (!s.label.endsWith(" · dna")) s.label += " · dna";
+  day.cur += 1;
+  wrapChimed = false;
+  if (day.cur >= day.slots.length) { endDay(); return; }
+  saveDay(); renderSlots(); tick(false);
+});
+
+$("tmDefer").addEventListener("click", () => {
+  if (!day) return;
+  const s = day.slots.splice(day.cur, 1)[0];
+  s.elapsed = 0; s.phase = 0; s.phaseTimes = [0, 0, 0, 0];
+  day.slots.push(s);
+  wrapChimed = false;
+  saveDay(); renderSlots(); tick(false);
+});
+
+$("tmPause").addEventListener("click", () => {
+  if (!day) return;
+  day.paused = !day.paused;
+  day.lastTick = Date.now();
+  $("tmPause").textContent = day.paused ? "resume" : "pause";
+  saveDay(); tick(false);
+});
 
 $("tmAdd5").addEventListener("click", () => {
   const s = day && day.slots[day.cur];
@@ -1090,8 +1289,13 @@ $("tmAdd5").addEventListener("click", () => {
   saveDay(); tick(false);
 });
 
-$("tmEdit").addEventListener("click", () => {
-  $("slotList").scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "start" });
+$("tmBreak").addEventListener("click", () => {
+  if (!day) return;
+  day.slots.splice(day.cur + 1, 0, {
+    id: Date.now(), label: "break", mins: 10, type: "break",
+    elapsed: 0, phase: 0, phaseTimes: [0, 0, 0, 0], done: false, actual: 0, dna: false
+  });
+  saveDay(); renderSlots(); tick(false);
 });
 
 $("tmEnd").addEventListener("click", () => { if (day) { day.slots.forEach(s => { if (!s.done && s.elapsed > 0) { s.actual = s.elapsed; s.done = true; } }); endDay(); } });
@@ -1101,34 +1305,42 @@ function endDay() {
   saveDay();
   clearInterval(tickTimer);
   const done = day.slots.filter(s => s.done);
-  const planned = done.reduce((a, s) => a + s.mins * 60, 0);
-  const actual = done.reduce((a, s) => a + s.actual, 0);
-  const onTime = done.filter(s => s.actual <= s.mins * 60 + 60).length;
-  const worst = done.reduce((m, s) => Math.max(m, s.actual - s.mins * 60), 0);
+  const seen = done.filter(s => !s.dna);
+  const planned = seen.reduce((a, s) => a + s.mins * 60, 0);
+  const actual = seen.reduce((a, s) => a + s.actual, 0);
+  const onTime = seen.filter(s => s.actual <= s.mins * 60 + 60).length;
+  const worst = seen.reduce((m, s) => Math.max(m, s.actual - s.mins * 60), 0);
   const phaseTotals = [0, 0, 0, 0];
-  done.forEach(x => x.phaseTimes.forEach((t, i) => { if (i > 0 && t > 0) phaseTotals[i - 1] += (i === 3 ? x.actual : x.phaseTimes[i + 1] || x.actual) - t; }));
+  seen.forEach(x => {
+    const pt = x.phaseTimes;
+    phaseTotals[0] += pt[1] > 0 ? pt[1] : x.actual;                       // history: 0 -> exam start
+    if (pt[1] > 0) phaseTotals[1] += (pt[2] > 0 ? pt[2] : x.actual) - pt[1]; // exam
+    if (pt[2] > 0) phaseTotals[2] += (pt[3] > 0 ? pt[3] : x.actual) - pt[2]; // plan
+    if (pt[3] > 0) phaseTotals[3] += x.actual - pt[3];                       // clerking
+  });
   const rows = [
-    ["patients seen", String(done.length)],
+    ["patients seen", String(seen.length)],
+    ["did not attend", String(done.filter(s => s.dna).length)],
     ["planned", mmss(planned)],
     ["actual", mmss(actual)],
-    ["on time (±1 min)", `${onTime} of ${done.length}`],
+    ["on time (±1 min)", `${onTime} of ${seen.length}`],
     ["worst overrun", worst > 0 ? "+" + Math.round(worst / 60) + " min" : "none"],
     ["pace", actual <= planned ? "ahead of plan" : `+${Math.round((actual - planned) / 60)} min over the day`],
     ["history / exam / plan", phaseTotals.some(t => t > 0) ? phaseTotals.slice(0, 3).map(t => Math.round(t / 60) + "m").join(" · ") : "not tracked"]
   ];
   $("tmSumRows").innerHTML = rows.map(r => `<div class="lv-row"><span class="t">${r[0]}</span><span class="v">${r[1]}</span></div>`).join("");
   const log = getLog();
-  log.push({ d: new Date().toISOString().slice(0, 10), t: `clinic · ${done.length} patients · ${actual <= planned ? "on time" : "+" + Math.round((actual - planned) / 60) + " min"}`, c: "clinic" });
+  log.push({ d: new Date().toISOString().slice(0, 10), t: `clinic · ${seen.length} patients · ${actual <= planned ? "on time" : "+" + Math.round((actual - planned) / 60) + " min"}`, c: "clinic" });
   store.set("gp-log", log);
   renderLog();
   showTmPane("summary");
 }
 
 $("tmCopy").addEventListener("click", () => {
-  const done = day.slots.filter(s => s.done);
-  const planned = done.reduce((a, s) => a + s.mins * 60, 0);
-  const actual = done.reduce((a, s) => a + s.actual, 0);
-  const text = `clinic · ${new Date(day.startedDay).toLocaleDateString("en-IE")}\npatients: ${done.length} · planned ${mmss(planned)} · actual ${mmss(actual)}`;
+  const seen = day.slots.filter(s => s.done && !s.dna);
+  const planned = seen.reduce((a, s) => a + s.mins * 60, 0);
+  const actual = seen.reduce((a, s) => a + s.actual, 0);
+  const text = `clinic · ${new Date(day.startedDay).toLocaleDateString("en-IE")}\npatients: ${seen.length} · planned ${mmss(planned)} · actual ${mmss(actual)}`;
   if (navigator.clipboard && navigator.clipboard.writeText) {
     navigator.clipboard.writeText(text).then(() => {
       $("tmCopy").textContent = "copied";
@@ -1143,31 +1355,45 @@ $("tmNew").addEventListener("click", () => {
   showTmPane("setup");
 });
 
-/* slot list with inline editing */
+/* slot list: colors, types, inline editing, reorder */
+function slotClass(s, i) {
+  if (s.done) return s.actual <= s.mins * 60 + 60 ? "done-ok" : "done-over";
+  if (i === day.cur) return "current";
+  return "future";
+}
 function renderSlots() {
   if (!day) return;
   $("slotList").innerHTML = day.slots.map((s, i) => {
-    if (s.done) return `<div class="slot done"><span class="n">${i + 1}</span><span style="font-size:.88rem">${esc(s.label)}</span><span class="actual">${mmss(s.actual)} / ${s.mins}m</span><span></span></div>`;
+    const typeOpts = SLOT_TYPES.map(t => `<option value="${t}"${s.type === t ? " selected" : ""}>${t}</option>`).join("");
+    if (s.done) return `<div class="slot done"><span class="n ${slotClass(s, i)}">${i + 1}</span><span style="font-size:.85rem">${esc(s.label)}</span><span class="actual">${s.dna ? "dna" : mmss(s.actual) + " / " + s.mins + "m"}</span><span></span><span></span></div>`;
     const locked = i < day.cur;
-    return `<div class="slot">
-      <span class="n">${i + 1}</span>
-      <input value="${esc(s.label)}" data-i="${i}" class="lab" ${locked ? "readonly" : ""}>
-      <input value="${s.mins}" data-i="${i}" class="mins" type="number" min="1" ${locked ? "readonly" : ""}>
-      <span class="tools">${locked || i === day.cur ? "" : `<button data-i="${i}" data-mv="-1" title="up">↑</button><button data-i="${i}" data-mv="1" title="down">↓</button><button data-i="${i}" data-del="1" title="remove">×</button>`}</span>
+    const live = i === day.cur;
+    return `<div class="slot t-${s.type}">
+      <span class="n ${slotClass(s, i)}">${i + 1}</span>
+      <input value="${esc(s.label)}" data-i="${i}" class="lab" ${locked || live ? "readonly" : ""}>
+      <select data-i="${i}" class="typ" ${locked || live ? "disabled" : ""}>${typeOpts}</select>
+      <input value="${s.mins}" data-i="${i}" class="mins" type="number" min="1" ${locked || live ? "readonly" : ""}>
+      <span class="tools">${locked || live ? "" : `<button data-i="${i}" data-mv="-1" title="up">↑</button><button data-i="${i}" data-mv="1" title="down">↓</button><button data-i="${i}" data-del="1" title="remove">×</button>`}</span>
     </div>`;
   }).join("");
 }
 $("slotList").addEventListener("input", e => {
-  const inp = e.target.closest("input"); if (!inp || !day) return;
-  const s = day.slots[+inp.dataset.i];
-  if (inp.classList.contains("lab")) s.label = inp.value;
-  if (inp.classList.contains("mins")) s.mins = Math.max(1, +inp.value || 1);
+  const el = e.target.closest("input, select"); if (!el || !day) return;
+  const s = day.slots[+el.dataset.i];
+  if (!s) return;
+  if (el.classList.contains("lab")) s.label = el.value;
+  if (el.classList.contains("mins")) s.mins = Math.max(1, +el.value || 1);
+  if (el.classList.contains("typ")) { s.type = el.value; el.closest(".slot").className = "slot t-" + s.type; }
   saveDay();
 });
 $("slotList").addEventListener("click", e => {
   const b = e.target.closest("button"); if (!b || !day) return;
   const i = +b.dataset.i;
-  if (b.dataset.del) { day.slots.splice(i, 1); if (day.cur >= day.slots.length) day.cur = day.slots.length - 1; }
+  if (b.dataset.del) {
+    day.slots.splice(i, 1);
+    if (day.slots.length === 0) { endDay(); return; }
+    if (day.cur >= day.slots.length) day.cur = Math.max(0, day.slots.length - 1);
+  }
   const mv = +(b.dataset.mv || 0);
   if (mv) {
     const j = i + mv;
@@ -1179,7 +1405,7 @@ $("slotList").addEventListener("click", e => {
 /* keyboard: space wraps, never while typing */
 document.addEventListener("keydown", e => {
   if (e.code !== "Space") return;
-  if (e.target.matches("input, textarea, button")) return;
+  if (e.target.matches("input, textarea, button, select")) return;
   if (location.hash !== "#/clinic" || !day || day.ended || $("tmRun").hidden) return;
   e.preventDefault();
   nextPatient();
@@ -1187,8 +1413,37 @@ document.addEventListener("keydown", e => {
 
 /* resume hint */
 if (day && !day.ended) $("tmRestore").hidden = false;
+</script>
 
-/* ================= admin ================= */
+<script>
+/* ================= the log + admin ================= */
+const LOG_CATS = { teaching: "var(--forest)", clinic: "var(--accent)", assessment: "var(--olive)", admin: "var(--forest-40)" };
+const DEFAULT_LOG = [
+  { d: "2026-07-15", t: "day release · curriculum planning", c: "teaching" },
+  { d: "2026-07-16", t: "clinic · 11 patients · on time", c: "clinic" },
+  { d: "2026-07-22", t: "day release · uncertainty of cases", c: "teaching" },
+  { d: "2026-07-23", t: "cbd · chronic disease review", c: "assessment" },
+  { d: "2026-07-29", t: "day release · audit and research", c: "teaching" },
+  { d: "2026-07-30", t: "clinic · 13 patients · 6 min over", c: "clinic" },
+  { d: "2026-08-05", t: "audit · data collection finished", c: "admin" },
+  { d: "2026-08-06", t: "clinic · 12 patients · on time", c: "clinic" },
+  { d: "2026-08-12", t: "mini-cex · paediatric fever", c: "assessment" },
+  { d: "2026-08-13", t: "study leave form sent", c: "admin" },
+  { d: "2026-08-19", t: "reading · deprescribing", c: "teaching" },
+  { d: "2026-08-20", t: "clinic · 10 patients · 2 min ahead", c: "clinic" },
+  { d: "2026-08-21", t: "cbd · diabetes annual review", c: "assessment" }
+];
+function getLog() { return [].concat(store.get("gp-log", null) ?? DEFAULT_LOG); }
+
+const DEMO_USERS = [
+  { name: "Dr Sahl Musa", meta: "year 3 · mid-west", role: "owner" },
+  { name: "Dr Aisha Rahman", meta: "year 3 · mid-west", role: "trainee" },
+  { name: "Dr Priya Nair", meta: "year 4 · mid-west", role: "trainee" },
+  { name: "Dr Conor Lynch", meta: "year 2 · mid-west", role: "trainee" },
+  { name: "Dr Elena Petrova", meta: "year 3 · mid-west", role: "trainee" },
+  { name: "Dr Tomás Ó Briain", meta: "year 1 · mid-west", role: "trainee" }
+];
+
 function renderUsers() {
   $("userRows").innerHTML = DEMO_USERS.map(u =>
     `<div class="r-row" style="grid-template-columns:minmax(11rem,15rem) 1fr auto"><span class="d" style="white-space:normal">${u.name}</span><span class="w">${u.meta}</span><span class="x">${u.role}</span></div>`
@@ -1205,7 +1460,9 @@ $("stSave").addEventListener("click", () => {
   const t = $("stTitle").value.trim();
   if (!t) return;
   const list = [].concat(store.get("gp-stream-extra", []));
-  list.push({ d: new Date().toISOString().slice(0, 10), t, u: $("stLink").value.trim() || "#/" });
+  const rawLink = $("stLink").value.trim();
+  const link = /^(#|https?:\/\/)/i.test(rawLink) ? rawLink : "#/";
+  list.push({ d: new Date().toISOString().slice(0, 10), t, u: link });
   store.set("gp-stream-extra", list);
   $("stTitle").value = ""; $("stLink").value = "";
   renderStream();
@@ -1214,13 +1471,13 @@ $("stSave").addEventListener("click", () => {
 });
 $("signOut").addEventListener("click", () => { sessionStorage.removeItem("gp-auth"); location.hash = "#/"; route(); });
 $("clearDemo").addEventListener("click", () => {
-  ["gp-renewals", "gp-contacts", "gp-log", "gp-day", "gp-stream-extra"].forEach(k => localStorage.removeItem(k));
+  ["gp-renewals", "gp-contacts", "gp-log", "gp-day", "gp-stream-extra", "gp-counters", "gp-audit"].forEach(k => localStorage.removeItem(k));
   location.reload();
 });
 renderUsers();
 renderLog();
 
-/* ================= decision trees ================= */
+/* ================= the walk-throughs ================= */
 const TREES = {
   derm: {
     title: "derm red flags",
@@ -1231,13 +1488,84 @@ const TREES = {
       n_blister: { q: "blistering, mucosal involvement, or skin starting to detach?", opts: [{ t: "yes", to: "res_sjs" }, { t: "no", to: "n_mole" }] },
       n_mole:    { q: "a pigmented lesion that is changing, bleeding, or ulcerated?", opts: [{ t: "yes", to: "res_melanoma" }, { t: "no", to: "n_spread" }] },
       n_spread:  { q: "erythema spreading fast, or pain out of proportion to what you see?", opts: [{ t: "yes", to: "res_nf" }, { t: "no", to: "res_settle" }] },
-
       res_sepsis:   { level: "escalate", title: "possible sepsis", line: "same-day senior assessment; if acutely unwell, 999.", net: "“if things change tonight, we meet again the same day.”", refs: [{ t: "NICE NG51 · sepsis", u: "https://www.nice.org.uk/guidance/ng51" }] },
       res_meningo:  { level: "escalate", title: "possible meningococcal disease", line: "do not wait for the full picture. the emergency pathway, now.", net: "“this is the one we never wait on.”", refs: [{ t: "NICE NG240 · meningitis", u: "https://www.nice.org.uk/guidance/ng240" }, { t: "DermNet · meningococcal disease", u: "https://dermnetnz.org/topics/meningococcal-disease" }] },
       res_sjs:      { level: "escalate", title: "possible stevens–johnson / TEN", line: "stop the suspect drug. emergency department today.", net: "“we are treating this as serious until proven otherwise.”", refs: [{ t: "DermNet · SJS / TEN", u: "https://dermnetnz.org/topics/stevens-johnson-syndrome-toxic-epidermal-necrolysis" }] },
       res_melanoma: { level: "escalate", title: "suspected melanoma: refer", line: "the two-week-wait pathway. refer today, tell the patient why, kindly.", net: "“we are going to look at this properly, and quickly.”", refs: [{ t: "NICE NG12 · suspected cancer", u: "https://www.nice.org.uk/guidance/ng12" }, { t: "DermNet · melanoma", u: "https://dermnetnz.org/topics/melanoma" }] },
       res_nf:       { level: "escalate", title: "cellulitis with severity features", line: "pain out of proportion is the tell. same-day review; think necrotising fasciitis.", net: "“i would rather see you back than hear about it later.”", refs: [{ t: "DermNet · cellulitis", u: "https://dermnetnz.org/topics/cellulitis" }] },
       res_settle:   { level: "settle", title: "no red flags today", line: "routine dermatology care. the safety net is the treatment plan's last line.", net: "“if it spreads, blisters, or you feel unwell, we talk the same day.”", refs: [{ t: "DermNet · the atlas", u: "https://dermnetnz.org/" }] }
+    }
+  },
+  chest: {
+    title: "chest pain",
+    start: "n_now",
+    nodes: {
+      n_now:      { q: "chest pain right now, with sweating, breathlessness, radiation to arm or jaw, or pain at rest over 15 minutes?", opts: [{ t: "yes", to: "res_acs" }, { t: "no", to: "n_press" }] },
+      n_press:    { q: "the spot itself hurts when you press it?", opts: [{ t: "yes", to: "res_msk" }, { t: "no", to: "n_pleuritic" }] },
+      n_pleuritic:{ q: "sharp pain, worse with breathing in, with breathlessness or coughing blood?", opts: [{ t: "yes", to: "res_pe" }, { t: "no", to: "n_burn" }] },
+      n_burn:     { q: "burning, meal-related, eased by antacids?", opts: [{ t: "yes", to: "res_gord" }, { t: "no", to: "res_chest_settle" }] },
+      res_acs:   { level: "escalate", title: "treat as acute coronary syndrome", line: "ecg now, the troponin pathway, the ambulance if the pain is active.", net: "“we treat this as the heart until the tests say otherwise.”", refs: [{ t: "NICE NG95 · chest pain", u: "https://www.nice.org.uk/guidance/ng95" }] },
+      res_msk:   { level: "settle", title: "likely musculoskeletal", line: "reproduce it, treat it, review it. the wall hurts because walls hurt.", net: "“if the pain changes character, we change the plan the same day.”", refs: [{ t: "NICE NG95 · assessment", u: "https://www.nice.org.uk/guidance/ng95" }] },
+      res_pe:    { level: "escalate", title: "think pulmonary embolism", line: "the wells score, then same-day assessment.", net: "“breathing pain plus breathlessness earns the scan.”", refs: [{ t: "NICE NG158 · vte", u: "https://www.nice.org.uk/guidance/ng158" }] },
+      res_gord:  { level: "settle", title: "likely reflux", line: "a trial of therapy and a review date. alarm features go elsewhere.", net: "“if you lose weight or food sticks, we escalate without waiting.”", refs: [{ t: "CKS · dyspepsia", u: "https://cks.nice.org.uk/topics/dyspepsia/" }] },
+      res_chest_settle: { level: "settle", title: "no flags; examine, ecg if any doubt", line: "the examination is the fifth test. document the safety net.", net: "“new pain tonight is a new conversation tonight.”", refs: [{ t: "NICE NG95 · chest pain", u: "https://www.nice.org.uk/guidance/ng95" }] }
+    }
+  },
+  head: {
+    title: "headache",
+    start: "n_thunder",
+    nodes: {
+      n_thunder: { q: "sudden, worst-ever, thunderclap?", opts: [{ t: "yes", to: "res_sah" }, { t: "no", to: "n_mening" }] },
+      n_mening:  { q: "fever with neck stiffness, or a non-blanching rash?", opts: [{ t: "yes", to: "res_hmeningo" }, { t: "no", to: "n_gca" }] },
+      n_gca:     { q: "new headache over fifty, scalp tenderness, pain on chewing?", opts: [{ t: "yes", to: "res_gca" }, { t: "no", to: "n_icp" }] },
+      n_icp:     { q: "worse on waking, with vomiting or neurological signs?", opts: [{ t: "yes", to: "res_icp" }, { t: "no", to: "res_tension" }] },
+      res_sah:      { level: "escalate", title: "subarachnoid until proven otherwise", line: "the emergency department now. a thunderclap is a diagnosis of urgency.", net: "“this headache does not wait for tomorrow.”", refs: [{ t: "NICE CG150 · headache", u: "https://www.nice.org.uk/guidance/cg150" }] },
+      res_hmeningo: { level: "escalate", title: "possible meningitis", line: "the emergency pathway. do not watch and wait.", net: "“stiff neck plus fever is a door we run through.”", refs: [{ t: "NICE NG240 · meningitis", u: "https://www.nice.org.uk/guidance/ng240" }] },
+      res_gca:      { level: "escalate", title: "think giant cell arteritis", line: "same-week workup; visual symptoms mean steroids today, biopsy follows.", net: "“we protect the eyes first and argue later.”", refs: [{ t: "NICE CG150 · headache", u: "https://www.nice.org.uk/guidance/cg150" }] },
+      res_icp:      { level: "escalate", title: "raised pressure until excluded", line: "imaging, same week at the latest, faster if signs.", net: "“mornings that start like this get scanned.”", refs: [{ t: "NICE CG150 · headache", u: "https://www.nice.org.uk/guidance/cg150" }] },
+      res_tension:  { level: "settle", title: "tension or migraine", line: "a diary, the triggers, a review date. most heads are kind heads.", net: "“if the pattern changes, the plan changes.”", refs: [{ t: "NICE CG150 · management", u: "https://www.nice.org.uk/guidance/cg150" }] }
+    }
+  },
+  fever: {
+    title: "the feverish child",
+    start: "n_frash",
+    nodes: {
+      n_frash:  { q: "a non-blanching rash?", opts: [{ t: "yes", to: "res_fmeningo" }, { t: "no", to: "n_red" }] },
+      n_red:    { q: "under three months, or lethargic, not feeding, breathing fast?", opts: [{ t: "yes", to: "res_fescalate" }, { t: "no", to: "n_days" }] },
+      n_days:   { q: "fever for five days or more?", opts: [{ t: "yes", to: "res_prolonged" }, { t: "no", to: "n_source" }] },
+      n_source: { q: "a clear source, and well between fevers?", opts: [{ t: "yes", to: "res_fsettle" }, { t: "no", to: "res_fsettle" }] },
+      res_fmeningo:   { level: "escalate", title: "possible meningococcal disease", line: "the emergency pathway, now.", net: "“we never wait on this one.”", refs: [{ t: "NICE NG240 · meningitis", u: "https://www.nice.org.uk/guidance/ng240" }] },
+      res_fescalate:  { level: "escalate", title: "same-day paediatric review", line: "under three months is its own rule. the traffic lights say red.", net: "“today, not tomorrow. that is the whole plan.”", refs: [{ t: "NICE NG143 · fever in under 5s", u: "https://www.nice.org.uk/guidance/ng143" }] },
+      res_prolonged:  { level: "escalate", title: "prolonged fever workup", line: "five days earns the workup; kawasaki sits on the list.", net: "“day five is a line, and we are past it.”", refs: [{ t: "NICE NG143 · fever in under 5s", u: "https://www.nice.org.uk/guidance/ng143" }] },
+      res_fsettle:    { level: "settle", title: "treat the source, write the safety net", line: "the traffic-light advice, in writing, every time.", net: "“if the child stops being themselves, we meet the same day.”", refs: [{ t: "NICE NG143 · traffic lights", u: "https://www.nice.org.uk/guidance/ng143" }] }
+    }
+  },
+  back: {
+    title: "back pain",
+    start: "n_cauda",
+    nodes: {
+      n_cauda:   { q: "loss of bladder or bowel control, numbness in the saddle, weakness in both legs?", opts: [{ t: "yes", to: "res_cauda" }, { t: "no", to: "n_bredflag" }] },
+      n_bredflag:{ q: "cancer history, weight loss, fever, or recent trauma?", opts: [{ t: "yes", to: "res_brefer" }, { t: "no", to: "n_inflam" }] },
+      n_inflam:  { q: "young onset, slow, stiff in the mornings, better with movement?", opts: [{ t: "yes", to: "res_axspa" }, { t: "no", to: "res_bsettle" }] },
+      res_cauda:   { level: "escalate", title: "cauda equina until excluded", line: "the emergency department today. the bladder does not forgive delay.", net: "“we go today, and we say why.”", refs: [{ t: "NICE NG59 · low back pain", u: "https://www.nice.org.uk/guidance/ng59" }] },
+      res_brefer:  { level: "escalate", title: "imaging and workup this week", line: "the red-flag history earns the scan.", net: "“we look properly, quickly.”", refs: [{ t: "NICE NG59 · low back pain", u: "https://www.nice.org.uk/guidance/ng59" }] },
+      res_axspa:   { level: "escalate", title: "think inflammatory back pain", line: "the rheumatology path, not the painkiller loop.", net: "“this pattern has a name, and we are going to check it.”", refs: [{ t: "NICE NG59 · low back pain", u: "https://www.nice.org.uk/guidance/ng59" }] },
+      res_bsettle: { level: "settle", title: "stay active, simple analgesia, review", line: "motion is the medicine. review if not settling.", net: "“keep moving; if it refuses to settle, we look again.”", refs: [{ t: "NICE NG59 · management", u: "https://www.nice.org.uk/guidance/ng59" }] }
+    }
+  },
+  dizzy: {
+    title: "dizziness",
+    start: "n_neuro",
+    nodes: {
+      n_neuro:   { q: "double vision, slurred speech, weakness, or trouble walking?", opts: [{ t: "yes", to: "res_posterior" }, { t: "no", to: "n_cardiac" }] },
+      n_cardiac: { q: "comes with chest pain, palpitations, or a faint?", opts: [{ t: "yes", to: "res_cardiac" }, { t: "no", to: "n_bppv" }] },
+      n_bppv:    { q: "spinning, seconds-long, triggered by rolling over or looking up?", opts: [{ t: "yes", to: "res_bppv" }, { t: "no", to: "n_postural" }] },
+      n_postural:{ q: "on standing, or after a medication change?", opts: [{ t: "yes", to: "res_postural" }, { t: "no", to: "res_dsettle" }] },
+      res_posterior: { level: "escalate", title: "posterior circulation until excluded", line: "the emergency pathway. dizziness with neurology is not dizziness.", net: "“this one is the brain, and the brain does not queue.”", refs: [{ t: "CKS · stroke and tia", u: "https://cks.nice.org.uk/topics/stroke-tia/" }] },
+      res_cardiac:   { level: "escalate", title: "ecg and cardiac workup", line: "syncope rules. the heart answers first.", net: "“we let the ecg talk before we reassure.”", refs: [{ t: "CKS · syncope", u: "https://cks.nice.org.uk/topics/syncope/" }] },
+      res_bppv:      { level: "settle", title: "likely bppv", line: "the epley manoeuvre. it usually works, and it works today.", net: "“we can often fix this in the room.”", refs: [{ t: "CKS · bppv", u: "https://cks.nice.org.uk/topics/benign-paroxysmal-positional-vertigo/" }] },
+      res_postural:  { level: "settle", title: "postural drop; check the tablets", line: "lying and standing pressures, then the medication list.", net: "“sometimes the treatment is the problem, and that is good news.”", refs: [{ t: "CKS · dizziness", u: "https://cks.nice.org.uk/topics/dizziness/" }] },
+      res_dsettle:   { level: "settle", title: "examine, hydrate, review", line: "most dizziness is kind. the review catches the rest.", net: "“if the room spins again, we are here.”", refs: [{ t: "CKS · dizziness", u: "https://cks.nice.org.uk/topics/dizziness/" }] }
     }
   }
 };
@@ -1260,7 +1588,7 @@ function renderTreeNode() {
     $("treeQ").textContent = node.q;
     $("treeResult").innerHTML = "";
     $("treeOpts").hidden = false;
-    $("treeOpts").innerHTML = node.opts.map((o, i) => `<button data-to="${o.to}"><span>${o.t}</span><span class="arr">→</span></button>`).join("");
+    $("treeOpts").innerHTML = node.opts.map(o => `<button data-to="${o.to}"><span>${o.t}</span><span class="arr">→</span></button>`).join("");
     $("crumbAtlas").addEventListener("click", () => { location.hash = "#/"; });
   } else {
     $("treeCrumb").innerHTML = `<button id="crumbAtlas2">the atlas</button> → ${tree.title} → the call`;
